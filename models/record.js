@@ -1,4 +1,4 @@
-const uuid = require('uuid')
+const { v4: uuid } = require('uuid')
 const fs = require('fs')
 const path = require('path')
 
@@ -10,7 +10,52 @@ class Record {
         this.id = uuid()
     }
 
-    save() {
-        
+    toJSON(){
+        return ({
+            name: this.name,
+            nomer_dogovora: this.nomer_dogovora,
+            data_zakl_dogovora: this.data_zakl_dogovora,
+            id: this.id
+        })
+    }
+
+    async save() {
+        const records = await Record.getAll()
+        records.push(this.toJSON())
+
+        return new Promise((resolve,reject)=>{
+            fs.writeFile(
+                path.join(__dirname,'..','data','records.json'),
+                JSON.stringify(records),
+                (err)=> {
+                    if(err) {
+                        reject(err)
+                    } else {
+                        resolve()
+                    }
+                }
+            )
+        })
+            
+    }
+
+    static getAll() {
+        return new Promise((resolve,reject) =>{
+            fs.readFile(
+                path.join(__dirname,'..', 'data', 'records.json'),
+                'utf-8',
+                (err, content) => {
+                    if(err) {
+                        reject(err)
+                    } else {
+                      resolve(JSON.parse(content))  
+                    }
+    
+                }
+            )
+        })
+ 
     }
 }
+
+module.exports = Record

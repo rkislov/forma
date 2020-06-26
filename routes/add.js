@@ -9,9 +9,9 @@ router.get('/', (req,res) => {
     })
 })
 
-router.post('/', (req,res)=> {
+router.post('/', async (req,res)=> {
     const record = new Record(req.body.name, req.body.nomer_dogovora, req.body.data_zakl_dogovora)
-    record.save()
+    await record.save()
     res.redirect('/table')
 })
 
