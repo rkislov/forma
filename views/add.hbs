@@ -2,12 +2,27 @@
 
 <form action="/add" method="POST">
     <div class="input-field">
-          <input id="name" type="text" class="validate">
+          <input id="name" name="name" type="text" class="validate" required>
           <label for="name">Заказчик (наименование,ИНН)</label>
+          <span class="helper-text" data-error="Введите название"></span>
+          
     </div>
 
     <div class="input-field">
-          <input id="nomer_dogovora" type="text" class="validate">
+          <input id="nomer_dogovora" name="nomer_dogovora" type="text" class="validate" required>
           <label for="nomer_dogovora">Номер договора</label>
+          <span class="helper-text" data-error="Введите номер договора"></span>
     </div>
+    
+    <div class="input-field">
+          <input id="data_zakl_dogovora" name="data_zakl_dogovora" type="text" class="datepicker">
+          <label for="data_zakl_dogovora">Дата заключения договора</label>
+          <span class="helper-text" data-error="Укажите дату"></span>
+    </div>
+
+    <button class="btn btn-primary">Добавить</button>
 </form>
+
+
+{{> jquery}}
+{{> datepicker}}
