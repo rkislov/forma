@@ -5,6 +5,10 @@ const departmentSchema = new Schema({
 name: {
     type: String,
     required: true
+},
+inn: {
+    type: String,
+    required: true
 }
 })
 
