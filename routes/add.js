@@ -10,9 +10,22 @@ router.get('/', (req,res) => {
 })
 
 router.post('/', async (req,res)=> {
-    const record = new Record(req.body.name, req.body.nomer_dogovora, req.body.data_zakl_dogovora)
-    await record.save()
-    res.redirect('/table')
+    
+    const record = new Record({
+        name: req.body.name,
+        nomer_dogovora: req.body.nomer_dogovora,
+        data_zakl_dogovora:req.body.data_zakl_dogovora
+    })
+
+    try {
+        await record.save()
+        res.redirect('/records')
+    } catch (error) {
+        console.log(error)
+    }
+    
+
+    
 })
 
 module.exports = router

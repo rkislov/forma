@@ -3,19 +3,47 @@
 <table>
     <thead>
         <tr>
+            <th>№ п/п</th>
             <th>Заказчик (наименование, ИНН)</th>
             <th>Номер договора/контракта  в ЕИС</th>
             <th>Дата заключения договора/контракта</th>
+            <th>Способ определения поставщика</th>
+            <th>Код по ОКПД2 </th>
+            <th>Код по ОКВЭД2</th>
+            <th>Программа или Национальный проект, в рамках которого проведена закупка (при наличии)</th>
+            <th>Объект закупки (наименование товара, указать в соответсвии со спецификацией)</th>
+            <th>Кол-во, шт.</th>
+            <th>Цена за единицу, руб.</th>
+            <th>Сумма, руб.</th>
+            <th>Цели, для достижения которых проведена закупка с указанием показателей в натуральном </th>
+            <th>Конкретные марки и модели</th>
+            <th>Наименование контрагента</th>
+            <th>ИНН контрагента</th>
+            <th>Место регистрации контрагента (указывается субъект РФ)</th>
             <th>Действия</th>
         </tr>
     </thead>
 {{#each records}}  
     <tr>
+        <td></td>
         <td>{{ name }} </td>
         <td>{{ nomer_dogovora }} </td>
         <td>{{ data_zakl_dogovora }} </td>
-        <td><a href="/records/{{id}}"><i class="tiny material-icons">remove_red_eye</i></a></td>
-        <td><a href="/records/{{id}}/edit?allow=true"><i class="tiny material-icons">mode_edit</i></a></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><a href="/records/{{id}}"><i class="tiny material-icons">remove_red_eye</i></a>
+        <a href="/records/{{id}}/edit?allow=true"><i class="tiny material-icons">mode_edit</i></a></td>
     </tr>
 {{/each}}
 </table>
