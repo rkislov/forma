@@ -7,6 +7,7 @@ const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-acce
 const homeRoutes = require('./routes/home')
 const tableRoutes = require('./routes/table')
 const addRouters = require('./routes/add')
+const userRouters = require('./routes/user')
 const { request } = require('http')
 const { setUncaughtExceptionCaptureCallback } = require('process')
 const User = require('./models/user')
@@ -31,7 +32,7 @@ app.use(express.urlencoded({extended: true}))
 app.use('/',homeRoutes)
 app.use('/records',tableRoutes)
 app.use('/add',addRouters)
-
+app.use('/users',userRouters)
 
 
 const PORT = process.env.PORT || 3000

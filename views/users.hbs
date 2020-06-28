@@ -1,0 +1,19 @@
+<h1>Пользователи</h1>
+{{#if users.length}}
+<table>
+    <thead>
+        <tr>
+             <td>Имя</td>
+        <td>Электронная почта</td>
+        </tr>
+    </thead>
+    {{#each users}}
+    <tr>
+        <td>{{name}}</td>
+        <td>{{email}}</td>
+    </tr>
+    {{/each}}
+</table>
+{{else}}
+<p>пользователи в системе не зарегистрированны</p>
+{{/if}}
