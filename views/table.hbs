@@ -1,6 +1,7 @@
 <h1>Таблица</h1>
 {{#if records.length}}
-<table>
+<div class="row">
+<table class="highlight centered col 12">
     <thead>
         <tr>
             <th>№ п/п</th>
@@ -47,6 +48,7 @@
     </tr>
 {{/each}}
 </table>
+</div>
 {{else}}
 <p>Данных пока нет</p>
 {{/if}}
