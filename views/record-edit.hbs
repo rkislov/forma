@@ -1,26 +1,29 @@
-<h1>Добавить данные</h1>
+<h1>Редактировать данные</h1>
 
-<form action="/add" method="POST">
+<form action="/records/edit" method="POST">
     <div class="input-field">
-          <input id="name" name="name" type="text" class="validate" required>
+          <input id="name" name="name" type="text" class="validate" required value="{{record.name}}">
           <label for="name">Заказчик (наименование,ИНН)</label>
           <span class="helper-text" data-error="Введите название"></span>
           
     </div>
 
     <div class="input-field">
-          <input id="nomer_dogovora" name="nomer_dogovora" type="text" class="validate" required>
+          <input id="nomer_dogovora" name="nomer_dogovora" type="text" class="validate" required value="{{record.nomer_dogovora}}">
           <label for="nomer_dogovora">Номер договора</label>
           <span class="helper-text" data-error="Введите номер договора"></span>
     </div>
     
     <div class="input-field">
-          <input id="data_zakl_dogovora" name="data_zakl_dogovora" type="text" class="datepicker">
+          <input id="data_zakl_dogovora" name="data_zakl_dogovora" type="text" class="datepicker" value="{{record.data_zakl_dogovora}}">
           <label for="data_zakl_dogovora">Дата заключения договора</label>
           <span class="helper-text" data-error="Укажите дату"></span>
     </div>
 
-    <button class="btn btn-primary">Добавить</button>
+
+     <input type="hidden" name=id value="{{record.id}}">
+
+    <button class="btn btn-primary">Редактировать</button>
 </form>
 
 

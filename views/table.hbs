@@ -1,1 +1,24 @@
 <h1>Таблица</h1>
+{{#if records.length}}
+<table>
+    <thead>
+        <tr>
+            <th>Заказчик (наименование, ИНН)</th>
+            <th>Номер договора/контракта  в ЕИС</th>
+            <th>Дата заключения договора/контракта</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+{{#each records}}  
+    <tr>
+        <td>{{ name }} </td>
+        <td>{{ nomer_dogovora }} </td>
+        <td>{{ data_zakl_dogovora }} </td>
+        <td><a href="/records/{{id}}"><i class="tiny material-icons">remove_red_eye</i></a></td>
+        <td><a href="/records/{{id}}/edit?allow=true"><i class="tiny material-icons">mode_edit</i></a></td>
+    </tr>
+{{/each}}
+</table>
+{{else}}
+<p>Данных пока нет</p>
+{{/if}}

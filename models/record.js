@@ -39,6 +39,27 @@ class Record {
             
     }
 
+    static async update(record) {
+       const records = await Record.getAll()
+
+       const idx = records.findIndex(c => c.id === record.id)
+
+       records[idx] = record
+
+       return new Promise((resolve,reject)=>{
+        fs.writeFile(
+            path.join(__dirname,'..','data','records.json'),
+            JSON.stringify(records),
+            (err)=> {
+                if(err) {
+                    reject(err)
+                } else {
+                    resolve()
+                }
+            }
+        )
+    })
+    }
     static getAll() {
         return new Promise((resolve,reject) =>{
             fs.readFile(
@@ -55,6 +76,11 @@ class Record {
             )
         })
  
+    }
+
+    static async getById(id) {
+        const records = await Record.getAll()
+        return records.find(c=> c.id === id )
     }
 }
 

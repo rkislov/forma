@@ -1,7 +1,8 @@
 <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Форма</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <a href="#!" class="brand-logo">Форма</a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul  class="right hide-on-med-and-down">
         
         {{#if isHome}}
         <li class="active"><a href="/">Главная</a></li>
@@ -9,9 +10,9 @@
         <li><a href="/">Главная</a></li>
         {{/if}}
         {{#if isTable}}
-        <li class="active"><a href="/table">Таблица</a></li>
+        <li class="active"><a href="/records">Записи</a></li>
         {{else}}
-        <li><a href="/table">Таблица</a></li>
+        <li><a href="/records">Записи</a></li>
         {{/if}}
         {{#if IsAdd}}
         <li class="active"><a href="/add">Добавить</a></li>
@@ -21,3 +22,9 @@
       </ul>
     </div>
   </nav>
+
+  <ul class="sidenav" id="mobile-demo">
+    <li><a href="/">Главная</a></li>
+    <li><a href="/records">Записи</a></li>
+    <li><a href="/add">Добавить</a></li>
+  </ul>
