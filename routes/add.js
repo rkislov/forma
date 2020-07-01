@@ -1,15 +1,16 @@
 const {Router} = require('express')
 const Record = require('../models/record')
 const router = Router()
+const auth = require('../middleware/auth')
 
-router.get('/', (req,res) => {
+router.get('/',auth, (req,res) => {
     res.render('add', {
         title: 'Добавление данных',
         isAdd: true
     })
 })
 
-router.post('/', async (req,res)=> {
+router.post('/',auth, async (req,res)=> {
     
     const record = new Record({
         name: req.body.name,

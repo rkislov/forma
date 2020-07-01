@@ -1,8 +1,9 @@
 const {Router} = require('express')
 const Record = require('../models/record')
 const router = Router()
+const auth = require('../middleware/auth')
 
-router.get('/', async (req,res) => {
+router.get('/',auth, async (req,res) => {
     const records = await Record.find()
     .populate('userId','email name')
 
@@ -15,7 +16,7 @@ router.get('/', async (req,res) => {
     })
 })
 
-router.get('/:id/edit', async (req,res) =>{
+router.get('/:id/edit',auth,async (req,res) =>{
     if (!req.query.allow) {
         return res.redirect('/')
     }
@@ -26,7 +27,7 @@ router.get('/:id/edit', async (req,res) =>{
     })
 })
 
-router.post('/remove', async (req,res)=>{
+router.post('/remove',auth, async (req,res)=>{
     try {
         await Record.deleteOne({
             _id: req.body.id
@@ -39,7 +40,7 @@ router.post('/remove', async (req,res)=>{
 
 })
 
-router.post('/edit', async (req,res)=>{
+router.post('/edit', auth, async (req,res)=>{
     const {id} = req.body
     delete req.body.id
     await Record.findByIdAndUpdate(id, {
@@ -63,7 +64,7 @@ router.post('/edit', async (req,res)=>{
     res.redirect('/records')
 })
 
-router.get('/:id', async (req,res) =>{
+router.get('/:id', auth, async (req,res) =>{
     const record = await Record.findById(req.params.id)
     res.render('record',{
         title: `Данные о записи ${record.name}`,

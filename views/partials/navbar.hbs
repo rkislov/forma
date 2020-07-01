@@ -3,28 +3,36 @@
       <a href="#!" class="brand-logo">Форма</a>
       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul  class="right hide-on-med-and-down">
-        
         {{#if isHome}}
         <li class="active"><a href="/">Главная</a></li>
         {{else}}
         <li><a href="/">Главная</a></li>
         {{/if}}
-        {{#if isTable}}
-        <li class="active"><a href="/records">Записи</a></li>
-        {{else}}
-        <li><a href="/records">Записи</a></li>
-        {{/if}}
-        {{#if IsAdd}}
-        <li class="active"><a href="/add">Добавить</a></li>
-        {{else}}
-        <li><a href="/add">Добавить</a></li>
-        {{/if}}
 
-        {{#if IsLogin}}
-        <li class="active"><a href="/auth/login#login">Войти</a></li>
+        {{#if isAuth}}
+          {{#if isTable}}
+          <li class="active"><a href="/records">Записи</a></li>
+          {{else}}
+          <li><a href="/records">Записи</a></li>
+          {{/if}}
+          {{#if IsAdd}}
+          <li class="active"><a href="/add">Добавить</a></li>
+          {{else}}
+          <li><a href="/add">Добавить</a></li>
+          {{/if}}
+          <li><a href="/auth/logout">Выйти</a></li>
         {{else}}
-        <li><a href="/auth/login#login">Войти</a></li>
+            {{#if IsLogin}}
+            <li class="active"><a href="/auth/login#login">Войти</a></li>
+            {{else}}
+            <li><a href="/auth/login#login">Войти</a></li>
+            {{/if}}
         {{/if}}
+        
+        
+        
+
+       
       </ul>
     </div>
   </nav>
