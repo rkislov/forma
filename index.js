@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 const csrf = require('csurf')
+const flash = require('connect-flash')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const Handlebars = require('handlebars')
@@ -14,13 +15,9 @@ const userRoutes = require('./routes/user')
 const authRoutes = require('./routes/auth')
 const { request } = require('http')
 const { setUncaughtExceptionCaptureCallback } = require('process')
-const User = require('./models/user')
-const Role = require('./models/role')
-const Department = require('./models/department')
-const user = require('./models/user')
 const varMiddleware = require('./middleware/variable')
+const keys = require('./keys')
 
-const MOMGODB_URI = `mongodb://10.0.16.74/forma`
 
 const app = express()
 
@@ -32,7 +29,7 @@ const hbs = exphbs.create({
 
 const store = MongoStore({
     colection: 'sessions',
-    uri: MOMGODB_URI
+    uri: keys.MOMGODB_URI
 })
 
 app.engine('hbs', hbs.engine)
@@ -42,12 +39,13 @@ app.set('views', 'views')
 app.use(express.static(path.join(__dirname,'public')))
 app.use(express.urlencoded({extended: true}))
 app.use(session({
-    secret: 'some secret value',
+    secret: keys.SESSION_SECRET,
     resave:false,
     saveUninitialized: false,
     store
 }))
 app.use(csrf())
+app.use(flash())
 app.use(varMiddleware)
 
 app.use('/',homeRoutes)
@@ -62,7 +60,7 @@ const PORT = process.env.PORT || 3000
 async function start() {
     try {
         
-        await mongoose.connect(MOMGODB_URI,{
+        await mongoose.connect(keys.MOMGODB_URI,{
             useNewUrlParser: true, 
             useUnifiedTopology: true,
             useFindAndModify: false
