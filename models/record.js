@@ -64,7 +64,12 @@ const record = new Schema({
     mesto_kontragenta: {
         type: String,
         required:true
+    },
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     }
+
 })
 
 module.exports = model('Record',record)

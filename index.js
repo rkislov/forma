@@ -7,12 +7,14 @@ const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-acce
 const homeRoutes = require('./routes/home')
 const tableRoutes = require('./routes/table')
 const addRouters = require('./routes/add')
-const userRouters = require('./routes/user')
+const userRoutes = require('./routes/user')
+const authRoutes = require('./routes/auth')
 const { request } = require('http')
 const { setUncaughtExceptionCaptureCallback } = require('process')
 const User = require('./models/user')
 const Role = require('./models/role')
 const Department = require('./models/department')
+const user = require('./models/user')
 
 
 const app = express()
@@ -27,12 +29,24 @@ app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
 app.set('views', 'views')
 
+app.use(async (req,res,next)=>{
+    try {
+        const user = await User.findById('5ef86e6ce2fbf51cac0a0165')
+        req.user = user
+        next()
+    } catch (error) {
+        console.log(error)
+    }
+
+})
+
 app.use(express.static(path.join(__dirname,'public')))
 app.use(express.urlencoded({extended: true}))
 app.use('/',homeRoutes)
 app.use('/records',tableRoutes)
 app.use('/add',addRouters)
-app.use('/users',userRouters)
+app.use('/users',userRoutes)
+app.use('/auth',authRoutes)
 
 
 const PORT = process.env.PORT || 3000

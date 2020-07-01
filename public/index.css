@@ -1,3 +1,33 @@
 .nav-wrapper {
     padding: 0 2rem;
 }
+.auth {
+    padding-top: 1rem;
+}
+
+.tabs .tab a {
+    color: rgba(38, 166, 70, 0.7);
+    /*Custom Text Color*/
+  }
+
+  .tabs .tab a.active{
+    color: rgba(38, 166, 70, 0.7);
+    /*Custom Text Color*/
+  }
+  
+  .tabs .tab a:hover {
+    color:#26a646;
+    /*Custom Color On Hover*/
+  }
+  
+  .tabs .tab a:focus.active {
+    color:#26a69a;
+    /*Custom Text Color While Active*/
+    background-color: rgba(38, 166, 87, 0.2);
+    /*Custom Background Color While Active*/
+  }
+  
+  .tabs .indicator {
+    background-color:#26a63b;
+    /*Custom Color Of Indicator*/
+  }

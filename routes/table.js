@@ -4,6 +4,10 @@ const router = Router()
 
 router.get('/', async (req,res) => {
     const records = await Record.find()
+    .populate('userId','email name')
+
+        console.log(records)
+
         res.render('table', {
         title: 'Просмотр данных',
         isTable: true,

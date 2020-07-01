@@ -7,3 +7,7 @@ const toCurrency = price => {
 document.querySelectorAll('.price').forEach(node => {
     node.textContent = toCurrency(node.textContent)
   })
+
+
+  M.Tabs.init(document.querySelectorAll('.tabs'));
+  M.Sidenav.init(document.querySelectorAll('.sidenav'));

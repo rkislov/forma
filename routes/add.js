@@ -27,7 +27,8 @@ router.post('/', async (req,res)=> {
         marki: req.body.marki,
         name_kontragent: req.body.name_kontragent,
         inn_kontragent: req.body.inn_kontragent,
-        mesto_kontragenta: req.body.mesto_kontragenta
+        mesto_kontragenta: req.body.mesto_kontragenta,
+        userId: req.user
     })
 
     try {
