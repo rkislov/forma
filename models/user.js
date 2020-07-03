@@ -23,7 +23,9 @@ const userSchema = new Schema ({
         type: Schema.Types.ObjectId,
         ref: 'Role',
         
-    }
+    },
+    resetToken: String,
+    resetTokenExp: Date 
 })
 
 module.exports = model('User', userSchema)

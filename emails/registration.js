@@ -1,6 +1,5 @@
-const key = require('../keys')
 const keys = require('../keys')
-const { helpers } = require('handlebars')
+
 module.exports = function(email) {
     return {
         to: email,
