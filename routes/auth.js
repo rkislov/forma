@@ -7,6 +7,7 @@ const router = Router()
 const keys = require('../keys')
 const regEmail = require('../emails/registration')
 const resetEmail = require('../emails/reset')
+const { reset } = require('nodemon')
 
 const transporter = nodemailer.createTransport({
     host: '10.0.16.29',
@@ -130,4 +131,56 @@ router.post('/reset', (req,res) => {
     }
 })
 
+router.get('/password/:token',async (req,res)=>{
+    if (!req.params.token) {
+        return res.redirect('/auth/login')
+    }
+    try {
+        const user = await User.findOne({
+        resetToken: req.params.token,
+        resetTokenExp: {$gt: Date.now()}
+        })
+
+        if(!user){
+            return res.redirect('/auth/login')
+        } else {
+            res.render('auth/password',{
+            title: 'Забыли пароль',
+            error: req.flash('error'),
+            userId: user._id.toString(),
+            token: req.params.token
+
+            })
+        }
+    } catch (error) {
+        console.log(error)
+    }
+
+    
+})
+
+router.post('/password', async(req,res)=>{
+    try {
+        const user = await User.findOne({
+            _id: req.body.userId,
+            resetToken: req.body.token,
+            resetTokenExp: {$gt: Date.now()}
+        })
+
+    
+        if(user){
+            user.password = await bcrypt.hash(req.body.password, 10)
+            user.resetToken = undefined
+            user.resetTokenExp = undefined
+            await user.save()
+            res.redirect('/auth/login')
+        } else {
+            req.flash('loginError', 'Время эизни токена истекло')
+            res.redirect('/auth/login')
+        }
+
+    } catch (error) {
+        console.log(error)
+    }
+})
 module.exports = router

@@ -29,7 +29,7 @@ router.post('/',auth, async (req,res)=> {
         name_kontragent: req.body.name_kontragent,
         inn_kontragent: req.body.inn_kontragent,
         mesto_kontragenta: req.body.mesto_kontragenta,
-        userId: req.user
+        userId: req.session.user
     })
 
     try {
