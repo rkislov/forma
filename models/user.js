@@ -8,7 +8,7 @@ const userSchema = new Schema ({
     },
     name: {
         type: String,
-        required: true
+        
     },
     password: {
         type: String,
@@ -19,9 +19,15 @@ const userSchema = new Schema ({
         ref: 'Department',
         
     },
-    roleId: {
+    parentDepartmentId: {
         type: Schema.Types.ObjectId,
-        ref: 'Role',
+        ref: 'Department',
+        
+    },
+    role: {
+        type: String,
+        require: true,
+        default: 'user'
         
     },
     resetToken: String,

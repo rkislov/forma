@@ -1,16 +1,32 @@
 <h1>Пользователи</h1>
+<div class="row">
+    <form class="col s12" action="/users/add" method="POST">
+      <div class="row">
+        <div class="input-field col s6">
+          {{!-- <i class="material-icons prefix">account_circle</i> --}}
+           <input type="hidden" name="_csrf" value="{{csrf}}">
+          <input id="email" type="email" name="email" class="validate">
+          <label for="email">Введите email  нового пользователя</label>
+         </div>
+        <div class="col s4">
+            <button class="btn-floating waves-effect waves-light green darken-1" type="submit"><i class="material-icons prefix">add</i></button>
+        </div>
+     </div>
+</form>
 {{#if users.length}}
 <table>
     <thead>
         <tr>
              <td>Имя</td>
-        <td>Электронная почта</td>
+            <td>Электронная почта</td>
+            <td>Роль</td>
         </tr>
     </thead>
     {{#each users}}
     <tr>
         <td>{{name}}</td>
         <td>{{email}}</td>
+        <td>{{role}}</td>
     </tr>
     {{/each}}
 </table>
