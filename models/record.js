@@ -35,15 +35,15 @@ const record = new Schema({
     },
     colichestvo: {
         type: Number,
-        required: true
+        
     },
     price: {
         type: Number,
-        required: true
+       
     },
     full_price: {
         type: Number,
-        required: true
+        
     },
     celi: {
         type: String,
