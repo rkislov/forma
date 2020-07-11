@@ -31,6 +31,12 @@
             <span class="helper-text" data-error="Введите пароль"></span>
         </div>
 
+        <div class="input-field">
+            <input id="confirm" name="confirm" type="password" class="validate" required>
+            <label for="confirm">Новый пароль<label>
+            <span class="helper-text" data-error="Введите пароль"></span>
+        </div>
+
         <input type="hidden" name="_csrf" value="{{csrf}}">
         <input type="hidden" name="userId" value="{{userId}}">
         <input type="hidden" name="token" value="{{token}}">

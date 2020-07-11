@@ -3,6 +3,8 @@ const { model } = require('mongoose')
 const User = require('../models/user')
 const Department = require('../models/department')
 const bcrypt = require('bcryptjs')
+const {validationResult} = require('express-validator')
+const {addValidators,registerValidators} = require('../utils/validators')
 const router = Router()
 const keys = require('../keys')
 const crypto = require('crypto')
@@ -29,19 +31,29 @@ router.get('/', async (req,res)=> {
     res.render('users',{
         title: 'Пользователи',
         isUsers: true,
+        error: req.flash('error'),
         userRole: req.session.user ? req.session.user.role : null,
         users
     })
     
 })
 
-router.post('/add',async (req,res) => {
+router.post('/add', addValidators , async (req,res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      req.flash('error', errors.array()[0].msg)
+      return res.status(422).redirect('/users')
+    }
+  
+  
     try {
         crypto.randomBytes(32, async (err,buffer) =>{
             if(err){
                 req.flash('error', 'что-то пошлло не так, повторите попытку позже')
                 return res.redirect('/users')                
             }
+
+            
         
         crypto.randomBytes(12, async (err,pass) =>{
             if(err){
@@ -50,9 +62,9 @@ router.post('/add',async (req,res) => {
             }
 
             const token = buffer.toString('hex')
-            const candidate = await User.findOne({email: req.body.email})
+            // const candidate = await User.findOne({email: req.body.email})
 
-            if (!candidate) {
+            // if (!candidate) {
                 const user = new User()
                 user.email = req.body.email
                 user.resetToken = token
@@ -62,10 +74,10 @@ router.post('/add',async (req,res) => {
                 await user.save()
                 await transporter.sendMail(addEmail(user.email, token))
                 res.redirect('/users') 
-            } else {
-                req.flash('error', 'Такой пользователя уже существует' )
-                return res.redirect('/users')
-            }
+            // } else {
+            //     req.flash('error', 'Такой пользователя уже существует' )
+            //     return res.redirect('/users')
+            // }
         })
     })
     } catch (error) {
@@ -90,7 +102,8 @@ router.get('/adduser/:token',async (req,res)=>{
             title: 'Создание пользователя',
             error: req.flash('error'),
             userId: user._id.toString(),
-            token: req.params.token
+            token: req.params.token,
+            error: req.flash('error')
 
             })
         }
@@ -101,13 +114,21 @@ router.get('/adduser/:token',async (req,res)=>{
     
 })
 
-router.post('/adduser', async (req,res)=>{
+router.post('/adduser', registerValidators, async (req,res)=>{
+        const errors= validationResult(req)
+        if (!errors.isEmpty()) {
+            req.flash('error', errors.array()[0].msg)
+            return res.status(422).redirect('/users/adduser')
+        }
+
+
     try {
         const user = await User.findOne({
             _id: req.body.userId,
             resetToken: req.body.token,
             resetTokenExp: {$gt: Date.now()}
         })
+
 
         const depCandidate = await Department.findOne({inn: req.body.departmentInn})
         if(!depCandidate) {

@@ -16,6 +16,7 @@ const authRoutes = require('./routes/auth')
 const { request } = require('http')
 const { setUncaughtExceptionCaptureCallback } = require('process')
 const varMiddleware = require('./middleware/variable')
+const errorHandler = require('./middleware/error')
 const keys = require('./keys')
 
 
@@ -25,8 +26,9 @@ const hbs = exphbs.create({
     defaultLayout: 'main',
     extname:'hbs',
     handlebars: allowInsecurePrototypeAccess(Handlebars),
-    helpers: require('./utils/hbs-helpers')
+    helpers: require('./utils/hbs-helpers') 
 })
+
 
 const store = MongoStore({
     colection: 'sessions',
@@ -54,6 +56,8 @@ app.use('/records',tableRoutes)
 app.use('/add',addRouters)
 app.use('/users',userRoutes)
 app.use('/auth',authRoutes)
+
+app.use(errorHandler)
 
 
 const PORT = process.env.PORT || 3000

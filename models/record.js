@@ -10,7 +10,7 @@ const record = new Schema({
         required: true,
     },
     data_zakl_dogovora: {
-        type: String,
+        type: Date,
         required: true,
     },
     sposob_opredelenia: {
@@ -52,6 +52,9 @@ const record = new Schema({
     marki: {
         type: String,
         
+    },
+    analiz: {
+        type:String
     },
     name_kontragent: {
         type:String,

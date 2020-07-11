@@ -3,6 +3,7 @@ const Record = require('../models/record')
 const router = Router()
 const auth = require('../middleware/auth')
 const record = require('../models/record')
+const moment = require('moment')
 
 function isOwner(record, req) {
  return record.userId.toString() === req.session.user._id.toString()
@@ -12,6 +13,7 @@ router.get('/',auth, async (req,res) => {
     try {
         const records = await Record.find()
         .populate('userId','email name')
+        
     
                
             res.render('table', {

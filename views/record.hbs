@@ -14,7 +14,7 @@
     </div>
     
     <div class="input-field">
-          <input  disabled  id="data_zakl_dogovora" name="data_zakl_dogovora" type="text" class="datepicker" value="{{record.data_zakl_dogovora}}">
+          <input  disabled  id="data_zakl_dogovora" name="data_zakl_dogovora" type="text" class="datepicker" value="{{moment record.data_zakl_dogovora format="DD.MM.YYYY" }} г.">
           <label for="data_zakl_dogovora">Дата заключения договора</label>
           <span class="helper-text" data-error="Укажите дату"></span>
     </div>
@@ -76,7 +76,11 @@
           <label for="marki">Конкретные марки и модели</label>
           <span class="helper-text" data-error="Укажите конкретные марки и модели"></span>
     </div>
-
+    <div class="input-field">
+          <input id="analiz" name="analiz" type="text" required value=" {{record.analiz}} ">
+          <label for="analiz">В случае, если заказчик рассматривал менее трех марок моделей товаров, характеристик работ, услуг, то обоснование в силу каких технических, технологических особенностей изделий не нашлось взаимозаменяемых для удовлетворения потребности заказчика.</label>
+          <span class="helper-text" data-error="Укажите особенности проведения закупки"></span>
+    </div>
     <div class="input-field">
           <input disabled id="name_kontragent" name="name_kontragent" type="text" value="{{record.name_kontragent}}">
           <label for="name_kontragent">Наименование контрагента</label>
