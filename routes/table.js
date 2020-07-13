@@ -2,8 +2,8 @@ const {Router} = require('express')
 const Record = require('../models/record')
 const router = Router()
 const auth = require('../middleware/auth')
-const record = require('../models/record')
-const moment = require('moment')
+
+
 
 function isOwner(record, req) {
  return record.userId.toString() === req.session.user._id.toString()
@@ -87,6 +87,7 @@ router.post('/edit', auth, async (req,res)=>{
             full_price: req.body.price*req.body.colichestvo,
             celi: req.body.celi,
             marki: req.body.marki,
+            analiz: req.body.analiz,
             name_kontragent: req.body.name_kontragent,
             inn_kontragent: req.body.inn_kontragent,
             mesto_kontragenta: req.body.mesto_kontragenta
@@ -110,6 +111,9 @@ router.get('/:id', auth, async (req,res) =>{
         console.log(error)
     }
     
+
 })
+
+
 
 module.exports = router
