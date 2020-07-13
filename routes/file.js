@@ -39,7 +39,7 @@ router.get('/full',async (req,res)=>{
         
         await workbook.xlsx.writeFile(path.join(__dirname,'..','download','zakazi.xlsx'))
 
-        res.download(path.join(__dirname,'..','download','zakazi.xlsx')).redirect('/records')
+        return res.download(path.join(__dirname,'..','download','zakazi.xlsx'))
     } catch (error) {
         console.log(error)
     }
