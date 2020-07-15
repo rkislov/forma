@@ -7,7 +7,8 @@ const router = Router()
 const keys = require('../keys')
 const regEmail = require('../emails/registration')
 const resetEmail = require('../emails/reset')
-const { reset } = require('nodemon')
+const {validationResult} = require('express-validator')
+const {registerValidators} =require('../utils/validators')
 
 const transporter = nodemailer.createTransport({
     host: '10.0.16.29',
@@ -70,7 +71,19 @@ router.post('/login', async(req,res)=>{
     
 })
 
-router.post('/register',async (req,res)=>{
+router.post('/register', registerValidators,async (req,res)=>{
+    const errors = validationResult(req)
+    if(!errors.isEmpty()){
+        return res.status(422).render('auth/login', {
+            title: 'Авторизация',
+            isLogin: true,
+            error: errors.array()[0].msg,
+            data: {
+                email: req.body.email,
+                name: req.body.name
+            }
+        })
+    }
     try {
         const {email,password,confirm,name} = req.body
         const candidate = await User.findOne({email})
@@ -79,18 +92,25 @@ router.post('/register',async (req,res)=>{
             req.flash('registerError', 'Пользователь с таким email уже существует')
             res.redirect('/auth/login#register')
         } else {
-            const hashPassword = await bcrypt.hash(password, 10)
-            const user = new User({
-                name,
-                email,
-                password: hashPassword
-            })
+           
+            if (password === confirm) {
+                const hashPassword = await bcrypt.hash(password, 10)
+                const user = new User({
+                    name,
+                    email,
+                    password: hashPassword
+                })
+    
+                await user.save()
+                res.redirect('/auth/login#login')
+                await transporter.sendMail(regEmail(email))
 
-            await user.save()
-            res.redirect('/auth/login#login')
-            
-            await transporter.sendMail(regEmail(email))
+            } else {
+                req.flash('registerError', 'Пароли не совпадают')
+                res.redirect('/auth/login#register')             
+            }     
         }
+
     } catch (error) {
         console.log(error)
     }

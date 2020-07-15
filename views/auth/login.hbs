@@ -8,7 +8,9 @@
     </div>
     <div class="row">
     <div id="login" class="col s6 offset-s3 ">
-
+        {{#if error}}
+            <p class="alert">{{error}}</p>
+        {{/if}}
         {{#if loginError}}
             <p class="alert">{{loginError}}</p>
         {{/if}}
@@ -37,7 +39,9 @@
 </div>    
 <div class="row">
 <div id="register" class="col s6 offset-s3">
-        
+        {{#if error}}
+            <p class="alert">{{error}}</p>
+        {{/if}}
         {{#if registerError}}
             <p class="alert">{{registerError}}</p>
         {{/if}}
@@ -45,14 +49,14 @@
         <h1>Регистрация</h1>
             <form action="/auth/register" method="POST">
         <div class="input-field">
-            <input id="remail" name="email" type="email" class="validate" required>
+            <input id="remail" name="email" type="email" class="validate" required required value=" {{data.email}} "> 
             <label for="remail">Email<label>
             <span class="helper-text" data-error="Введите email"></span>
             
         </div>
 
           <div class="input-field">
-            <input id="name" name="name" type="text" class="validate" required>
+            <input id="name" name="name" type="text" class="validate" required required value=" {{data.name}} ">
             <label for="name">Ф.И.О<label>
             <span class="helper-text" data-error="Введите Ф.И.О"></span>
             
@@ -65,7 +69,7 @@
         </div>
 
         <div class="input-field">
-            <input id="confirm" name="rpassword" type="password" class="validate" required>
+            <input id="confirm" name="confirm" type="password" class="validate" required>
             <label for="confirm">Пароль еще раз</label>
             <span class="helper-text" data-error="Введите пароль "></span>
         </div>
