@@ -77,7 +77,7 @@ router.post('/register',async (req,res)=>{
 
         if(candidate){
             req.flash('registerError', 'Пользователь с таким email уже существует')
-            res.redirect('/auth/login/#register')
+            res.redirect('/auth/login#register')
         } else {
             const hashPassword = await bcrypt.hash(password, 10)
             const user = new User({
