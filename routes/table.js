@@ -19,7 +19,7 @@ router.get('/',auth, async (req,res) => {
             res.render('table', {
             title: 'Просмотр данных',
             isTable: true,
-            userId: req.session.user ? req.session.user._id.toString() : null,
+            userRole: req.session.user ? req.session.user.role : null,
             records
            
         })

@@ -30,6 +30,10 @@ const userSchema = new Schema ({
         default: 'user'
         
     },
+    grbsId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Grbs',    
+    },
     resetToken: String,
     resetTokenExp: Date 
 })

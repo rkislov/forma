@@ -8,6 +8,7 @@ const {recordValidator} = require('../utils/validators')
 router.get('/',auth, (req,res) => {
     res.render('add', {
         title: 'Добавление данных',
+        userRole: req.session.user ? req.session.user.role : null,
         isAdd: true
     })
 })

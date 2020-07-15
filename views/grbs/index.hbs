@@ -1,0 +1,39 @@
+<h1>Главные распорядители бюджетных средств</h1>
+        {{#if error}}
+            <p class="alert">{{error}}</p>
+        {{/if}}
+<div class="row">
+    <form class="col s12" action="/grbs/add" method="POST" >
+      <div class="row">
+        <div class="input-field col s6">
+          {{!-- <i class="material-icons prefix">account_circle</i> --}}
+          <input type="hidden" name="_csrf" value="{{csrf}}">
+          <input id="name" type="text" name="name" class="validate">
+          <label for="name">Введите название нового главного распорядителя бюджетных средств</label>
+         </div>
+        <div class="col s4">
+            <button class="btn-floating waves-effect waves-light green darken-1" type="submit"><i class="material-icons prefix">add</i></button>
+        </div>
+     </div>
+</form>
+{{#if allgrbs.length}}
+<table>
+    <thead>
+        <tr>
+            <td>Имя</td>
+            <td>Действия</td>
+        </tr>
+    </thead>
+    {{#each allgrbs}}
+    <tr>
+        <td>{{name}}</td>
+        <td>
+            <a href="/grbs/{{id}}/edit?allow=true"><i class="tiny material-icons">mode_edit</i></a></td>
+        </td>
+        
+    </tr>
+    {{/each}}
+</table>
+{{else}}
+<p>Главных распорядителей бюджетных средств в системе не зарегистрированно</p>
+{{/if}}

@@ -1,5 +1,6 @@
 const {body} = require('express-validator')
 const User = require('../models/user')
+const { locale } = require('moment')
 
 
 exports.addValidators = [
@@ -29,4 +30,9 @@ exports.registerValidators = [
 
 exports.recordValidator= [
     body('price').isNumeric().withMessage('Введите корректную цену')
+]
+
+exports.grbsValidators = [
+    body('name').isAlpha().isLength({min:3}).withMessage('Имя должно быть минимум 3 символа').trim()
+
 ]

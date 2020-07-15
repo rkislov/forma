@@ -27,6 +27,11 @@
             {{else}}
               <li><a href="/users">Пользователи</i></a></li>
             {{/if}}
+            {{#if isGrbs}}
+              <li class="active"><a href="/grbs">ГРБС</i></a></li>
+            {{else}}
+              <li><a href="/grbs">ГРБС</i></a></li>
+            {{/if}}
           {{/ifeq}}
           <li><a href="/auth/logout">Выйти</a></li>
         {{else}}
