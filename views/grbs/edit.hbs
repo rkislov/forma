@@ -1,0 +1,20 @@
+<h1>Редактировать данные</h1>
+
+<form action="/grbs/edit" method="POST" class="record-form">
+    <div class="input-field">
+          <input id="name" name="name" type="text" class="validate" required value="{{grbs.name}}">
+          <label for="name">Главный распорядитель бюджетных средств</label>
+          <span class="helper-text" data-error="Введите название"></span>
+          
+    </div>
+
+    
+     <input type="hidden" name=id value="{{grbs.id}}">
+      <input type="hidden" name="_csrf" value="{{csrf}}">
+    <button type="submit" class="btn btn-primary green darken-1">Редактировать</button>
+</form>
+
+
+
+
+

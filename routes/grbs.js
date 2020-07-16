@@ -4,9 +4,6 @@ const {validationResult} = require('express-validator')
 const Grbs = require('../models/grbs')
 const router = Router()
 
-function isOwner(record, req) {
-    return record.userId.toString() === req.session.user._id.toString()
-   }
 
 router.get('/',auth, async (req,res)=>{
     try {
@@ -56,23 +53,36 @@ router.post('/add',auth,async(req,res)=>{
  })
  router.get('/:id/edit',auth,async (req,res) =>{
     if (!req.query.allow) {
-        return res.redirect('/')
+        return res.redirect('/grbs')
     }
 
     try {
-        const record = await Grbs.findById(req.params.id)
+        const grbs = await Grbs.findById(req.params.id)
 
-        if(!isOwner(record, req)) {
-            return res.redirect('/records')
-        }
-        res.render('grbs/edit',{
+            res.render('grbs/edit',{
             title: `редактирование ${grbs.name}`,
-            record
+            grbs
         })
     
     } catch (error) {
         console.log(error)
     }
 
+})
+
+router.post('/edit', auth, async (req,res)=>{
+    try {
+        const {id} = req.body
+        const grbs = await Grbs.findById(id)
+        delete req.body.id
+        await Grbs.findByIdAndUpdate(id, {
+            name: req.body.name,
+        })
+        res.redirect('/grbs')
+    } catch (error) {
+        console.log(error)
+    }
+    
+    
 })
 module.exports = router
