@@ -10,11 +10,12 @@
                 
             </h1>
             
-            </div>
-    
-    
     </div>
+    
+    
+    
 {{/ifeq}}
+
 {{#if records.length}}
 <div class="row">
 <table class="highlight centered col 12">
@@ -33,7 +34,7 @@
 {{#each records}}  
     <tr>
         <td>#</td>
-        <td>{{ name }} </td>
+        <td>{{ name }}, {{inn}} </td>
         <td>{{ nomer_dogovora }} </td>
         <td>{{ moment data_zakl_dogovora format="DD.MM.YYYY" }} г.</td>
         <td> {{object}} </td>
@@ -43,7 +44,7 @@
         {{#ifeq userId._id @root.userId}}
             <a href="/records/{{id}}/edit?allow=true"><i class="tiny material-icons">mode_edit</i></a></td>
         {{/ifeq}}
-        
+       
     </tr>
 {{/each}}
 
@@ -51,5 +52,8 @@
 
 </div>
 {{else}}
+<div class="row">
 <p>Данных пока нет</p>
+</div>
 {{/if}}
+</div>

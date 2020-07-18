@@ -5,6 +5,10 @@ const record = new Schema({
         type: String,
         required: true,
     },
+    inn: {
+        type: String,
+        required: true,
+    },
     nomer_dogovora: {
         type: String,
         required: true,
@@ -67,6 +71,9 @@ const record = new Schema({
     mesto_kontragenta: {
         type: String,
         required:true
+    },
+    grbs: {
+        type:String
     },
     userId: {
         type: Schema.Types.ObjectId,

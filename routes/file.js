@@ -17,6 +17,7 @@ router.get('/full',async (req,res)=>{
         
         worksheet.columns = [
             {header:'Заказчик (наименование)', key: 'name', width: 30},
+            {header:'Заказчик (ИНН)', key: 'inn', width: 30},
             {header:'Номер договора/контракта  в ЕИС', key: 'nomer_dogovora', width: 30},
             {header:'Дата заключения договора/контракта', key: 'data_zakl_dogovora', width: 30},
             {header:'Способ определения поставщика', key: 'sposob_opredelenia', width: 30},
@@ -33,6 +34,7 @@ router.get('/full',async (req,res)=>{
             {header:'Наименование контрагента', key: 'name_kontragent', width: 30},
             {header:'ИНН контрагента', key: 'inn_kontragent', width: 30},
             {header:'Место регистрации контрагента (указывается субъект РФ)', key: 'mesto_kontragenta', width: 30},
+            {header:'ГРБС', key: 'grbs', width: 30},
         ]
 
         worksheet.addRows(records)

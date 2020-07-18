@@ -1,7 +1,7 @@
 <h1>данные о записи</h1>
 
     <div class="input-field">
-          <input  disabled id="name" name="name" type="text" class="validate" value="{{record.name}}">
+          <input  disabled id="name" name="name" type="text" class="validate" value="{{record.name}}, {{record.inn}}">
           <label for="name">Заказчик (наименование,ИНН)</label>
           <span class="helper-text" data-error="Введите название"></span>
           
@@ -77,7 +77,7 @@
           <span class="helper-text" data-error="Укажите конкретные марки и модели"></span>
     </div>
     <div class="input-field">
-          <input id="analiz" name="analiz" type="text" required value=" {{record.analiz}} ">
+          <input disabled id="analiz" name="analiz" type="text" required value=" {{record.analiz}} ">
           <label for="analiz">В случае, если заказчик рассматривал менее трех марок моделей товаров, характеристик работ, услуг, то обоснование в силу каких технических, технологических особенностей изделий не нашлось взаимозаменяемых для удовлетворения потребности заказчика.</label>
           <span class="helper-text" data-error="Укажите особенности проведения закупки"></span>
     </div>

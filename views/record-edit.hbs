@@ -15,7 +15,7 @@
     </div>
     
     <div class="input-field">
-          <input id="data_zakl_dogovora" name="data_zakl_dogovora" type="text" class="datepicker" value="{{record.data_zakl_dogovora}}">
+          <input id="data_zakl_dogovora" name="data_zakl_dogovora" type="text" class="datepicker" value="{{ moment record.data_zakl_dogovora format="DD.MM.YYYY" }}">
           <label for="data_zakl_dogovora">Дата заключения договора</label>
           <span class="helper-text" data-error="Укажите дату"></span>
     </div>

@@ -5,22 +5,26 @@ const auth = require('../middleware/auth')
 
 
 
+
 function isOwner(record, req) {
  return record.userId.toString() === req.session.user._id.toString()
 }
 
 router.get('/',auth, async (req,res) => {
+    userId= req.session.user._id.toString()
     try {
         const records = await Record.find()
         .populate('userId','email name')
-        
+              
     
                
             res.render('table', {
             title: 'Просмотр данных',
             isTable: true,
             userRole: req.session.user ? req.session.user.role : null,
-            records
+            records,
+            userId  
+            
            
         })
             
@@ -73,10 +77,15 @@ router.post('/edit', auth, async (req,res)=>{
         if(!isOwner(record, req)) {
             return res.redirect('/records')
         }
+        
+        const parts = req.body.data_zakl_dogovora.split('.')
+        const date = new Date(parts[2],parts[1]-1,parts[0])
+        
         await Record.findByIdAndUpdate(id, {
             name: req.body.name,
+            inn: req.body.inn,
             nomer_dogovora: req.body.nomer_dogovora,
-            data_zakl_dogovora: req.body.data_zakl_dogovora,
+            data_zakl_dogovora: date,
             sposob_opredelenia: req.body.sposob_opredelenia,
             kod_okpd2: req.body.kod_okpd2,
             kod_okved2: req.body.kod_okved2,
@@ -90,7 +99,8 @@ router.post('/edit', auth, async (req,res)=>{
             analiz: req.body.analiz,
             name_kontragent: req.body.name_kontragent,
             inn_kontragent: req.body.inn_kontragent,
-            mesto_kontragenta: req.body.mesto_kontragenta
+            mesto_kontragenta: req.body.mesto_kontragenta,
+            grbs: req.body.grbs,
         })
         res.redirect('/records')
     } catch (error) {
