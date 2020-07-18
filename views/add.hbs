@@ -1,7 +1,7 @@
 <h1>Добавить данные</h1>
       {{#if error}}
             <p class="alert">{{error}}</p>
-        {{/if}}
+      {{/if}}
 <form action="/add" method="POST">
     <div class="input-field">
           <input id="name" name="name" type="text" class="validate" required value=" {{data.name}} ">

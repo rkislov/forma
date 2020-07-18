@@ -6,20 +6,25 @@
         
 
         {{#if isAuth}}
-          {{#if isHome}}
+          {{!-- {{#if isHome}}
           <li class="active"><a href="/">Главная</a></li>
           {{else}}
           <li><a href="/">Главная</a></li>
-          {{/if}}
+          {{/if}} --}}
           {{#if isTable}}
           <li class="active"><a href="/records">Записи</a></li>
           {{else}}
           <li><a href="/records">Записи</a></li>
           {{/if}}
-          {{#if IsAdd}}
+          {{#if isAdd}}
           <li class="active"><a href="/add">Добавить</a></li>
           {{else}}
           <li><a href="/add">Добавить</a></li>
+          {{/if}}
+          {{#if isProfile}}
+          <li class="active"><a href="/profile">Профиль</a></li>
+          {{else}}
+          <li><a href="/profile">Профиль</a></li>
           {{/if}}
           {{#ifeq userRole 'admin'}}
             {{#if isUsers}}

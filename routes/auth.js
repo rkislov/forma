@@ -54,8 +54,17 @@ router.post('/login', async(req,res)=>{
                     if (err) {
                         throw err
                     }
-                    res.redirect('/')
+                    if(!candidate.grbsId){
+                        req.flash('error', 'Не верный пароль')
+                        res.redirect('/profile') 
+                    } else {
+                        res.redirect('/')
+                    }
+                   
+                    
                 })
+                
+                
             }else{
                 req.flash('loginError', 'Не верный пароль')
                 res.redirect('/auth/login#/login')

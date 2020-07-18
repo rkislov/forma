@@ -1,0 +1,53 @@
+<h1>Профиль</h1>
+<div class="row">
+    {{#if user.departmentId}}
+    {{else}}
+     <p class="alert">Ведите данные совоей организации</p>       
+    {{/if}}
+    {{#if user.grbsId}}
+    {{else}}
+     <p class="alert">Выберите главного распределителя бюджетных средств</p>       
+    {{/if}}
+    <div class="col s6">
+
+    </div>
+    <div class="col s6">
+        <p> Ваш email: <strong>{{user.email}}</strong></p>
+        <form action="/profile" method="post">
+            <div class="input-field">
+                <input id="name" name="name" type="text" class="validate" required value="{{user.name}}">
+                <label for="name">Напишиет своё имя<label>
+                <span class="helper-text" data-error="Напишиет своё имя"></span>
+            </div>
+            <div class="input-field">
+                <input id="departmentName" name="departmentName" type="text" class="validate" required value="{{user.departmentId.name}}">
+                <label for="departmentName">Введите название организации<label>
+                <span class="helper-text" data-error="Введите название организации"></span>
+                
+            </div>
+            <div class="input-field">
+                <input id="departmentInn" name="departmentInn" type="text" class="validate" required value="{{user.departmentId.inn}}">
+                <label for="departmentInn">Введите ИНН организации<label>
+                <span class="helper-text" data-error="Введите ИНН организации"></span>
+                
+            </div>
+            <div class="input-field col s12">
+            <select name="grbs">
+                {{#if user.grbsId}}
+                <option value="{{user.grbsId._id}}" disabled selected>{{user.grbsId.name}}</option>
+                {{else}}
+                <option value="" disabled selected>Выберите ГРБС</option>
+                {{/if}}
+                {{#each grbs}}
+                <option value="{{_id}}">{{name}}</option>
+                {{/each}}
+            </select>
+            <label>Выберите своего Главного распорядителя бюджетных средств</label>
+        </div>
+        <input type="hidden" name="_csrf" value="{{csrf}}">
+        <input type="hidden" name="userId" value="{{user._id}}">
+        
+        <button class="btn btn-primary green darken-1" type="submit">Обновить</button>
+        </form>
+    </div>
+</div>
