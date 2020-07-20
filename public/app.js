@@ -14,4 +14,3 @@ document.querySelectorAll('.price').forEach(node => {
 
   M.FormSelect.init(document.querySelectorAll('select'));
   
- 
