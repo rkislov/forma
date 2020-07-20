@@ -12,10 +12,18 @@ function isOwner(record, req) {
 
 router.get('/',auth, async (req,res) => {
     userId= req.session.user._id.toString()
+    const perPage = 20
+    const page =  1
+
     try {
+        
+        // const records = await Record.find()
+        // .populate('userId','email name')
         const records = await Record.find()
         .populate('userId','email name')
-              
+        .skip((perPage*page)- perPage)
+        .limit(perPage)
+        const pageCount = await Record.countDocuments()
     
                
             res.render('table', {
@@ -23,9 +31,47 @@ router.get('/',auth, async (req,res) => {
             isTable: true,
             userRole: req.session.user ? req.session.user.role : null,
             records,
-            userId  
+            userId,
+            pagination: {
+                page,       // The current page the user is on
+                pageCount  // The total number of available pages
+              }
             
-           
+                                 
+        })
+            
+    } catch (error) {
+        console.log(error)
+    }
+})  
+router.get('/:page',auth, async (req,res) => {
+    userId= req.session.user._id.toString()
+    const perPage = 20
+    const page = req.params.page || 1
+
+    try {
+        
+        // const records = await Record.find()
+        // .populate('userId','email name')
+        const records = await Record.find()
+        .populate('userId','email name')
+        .skip((perPage*page)- perPage)
+        .limit(perPage)
+        const pageCount = await Record.countDocuments()
+    
+               
+            res.render('table', {
+            title: 'Просмотр данных',
+            isTable: true,
+            userRole: req.session.user ? req.session.user.role : null,
+            records,
+            userId,
+            pagination: {
+                page,       // The current page the user is on
+                pageCount  // The total number of available pages
+              }
+            
+                                 
         })
             
     } catch (error) {

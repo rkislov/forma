@@ -27,13 +27,44 @@ const transporter = nodemailer.createTransport({
   })
 
 router.get('/', async (req,res)=> {
+    const perPage = 20
+    const page =  1
     const users = await User.find()
+    .skip((perPage*page)- perPage)
+    .limit(perPage)
+    const pageCount = await User.countDocuments()
+    
     res.render('users',{
         title: 'Пользователи',
         isUsers: true,
         error: req.flash('error'),
         userRole: req.session.user ? req.session.user.role : null,
-        users
+        users,
+        pagination: {
+            page,       // The current page the user is on
+            pageCount  // The total number of available pages
+          }
+    })
+    
+})
+router.get('/:page', async (req,res)=> {
+    const perPage = 20
+    const page = req.params.page || 1
+    const users = await User.find()
+    .skip((perPage*page)- perPage)
+    .limit(perPage)
+    const pageCount = await User.countDocuments()
+    
+    res.render('users',{
+        title: 'Пользователи',
+        isUsers: true,
+        error: req.flash('error'),
+        userRole: req.session.user ? req.session.user.role : null,
+        users,
+        pagination: {
+            page,       // The current page the user is on
+            pageCount  // The total number of available pages
+          }
     })
     
 })

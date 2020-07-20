@@ -5,6 +5,7 @@ const flash = require('connect-flash')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const Handlebars = require('handlebars')
+const paginate = require('express-paginate');
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 const session = require('express-session')
 const MongoStore = require('connect-mongodb-session')(session)
@@ -53,6 +54,7 @@ app.use(session({
 app.use(csrf())
 app.use(flash())
 app.use(varMiddleware)
+app.use(paginate.middleware(10, 50));
 
 app.use('/',homeRoutes)
 app.use('/records', tableRoutes)

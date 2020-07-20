@@ -1,4 +1,5 @@
 const moment = require('helper-moment')
+const paginate = require('handlebars-paginate');
 module.exports = {
     ifeq(a,b, options) {
         if(a == b) {
@@ -6,8 +7,8 @@ module.exports = {
         } 
         return options.inverse(this)
     },
-moment
-    
+moment,
+paginate
 }
 
 

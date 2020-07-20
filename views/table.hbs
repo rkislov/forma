@@ -56,4 +56,19 @@
 <p>Данных пока нет</p>
 </div>
 {{/if}}
+
+<div class="pagination pagination-centered">
+  <ul>
+    {{#paginate pagination type="previous"}}
+      <li {{#if disabled}}class="disabled"{{/if}}><a href="/records/{{n}}"><i class="material-icons">chevron_left</i></a></li>
+    {{/paginate}}
+    {{#paginate pagination type="middle" limit="3"}}
+      <li {{#if active}}class="active green darken-1"{{/if}}><a href="/records/{{n}}">{{n}}</a></li>
+    {{/paginate}}
+    {{#paginate pagination type="next"}}
+      <li {{#if disabled}}class="disabled"{{/if}}><a href="/records/{{n}}"><i class="material-icons">chevron_right</i></a></li>
+    {{/paginate}}
+  </ul>
 </div>
+
+
