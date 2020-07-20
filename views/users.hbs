@@ -34,6 +34,12 @@
     {{/each}}
 </table>
 
+
+
+{{else}}
+<p>пользователи в системе не зарегистрированны</p>
+{{/if}}
+
 <div class="pagination pagination-centered">
   <ul>
     {{#paginate pagination type="previous"}}
@@ -47,7 +53,3 @@
     {{/paginate}}
   </ul>
 </div>
-
-{{else}}
-<p>пользователи в системе не зарегистрированны</p>
-{{/if}}
