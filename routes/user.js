@@ -47,7 +47,8 @@ router.get('/', async (req,res)=> {
     })
     
 })
-router.get('/:page', async (req,res)=> {
+
+router.get('/page/:page', async (req,res)=> {
     const perPage = 20
     const page = req.params.page || 1
     const users = await User.find()
