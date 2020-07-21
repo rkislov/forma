@@ -53,8 +53,10 @@ try {
     } else {
 
         if(user){
+            depCandidate.name = req.body.departmentName
             user.departmentId = depCandidate
             user.grbsId = grbs
+            await depCandidate.save()
             await user.save()
             res.redirect('/profile')
         } else {
