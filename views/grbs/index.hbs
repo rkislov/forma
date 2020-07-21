@@ -5,11 +5,16 @@
 <div class="row">
     <form class="col s12" action="/grbs/add" method="POST" >
       <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col s4">
           {{!-- <i class="material-icons prefix">account_circle</i> --}}
           <input type="hidden" name="_csrf" value="{{csrf}}">
           <input id="name" type="text" name="name" class="validate">
-          <label for="name">Введите название нового главного распорядителя бюджетных средств</label>
+          <label for="name">Введите название нового ГРБС</label>
+         </div>
+         <div class="input-field col s4">
+                  
+          <input id="email" type="email" name="email" class="validate">
+          <label for="email">Введите email ответсвенного</label>
          </div>
         <div class="col s4">
             <button class="btn-floating waves-effect waves-light green darken-1" type="submit"><i class="material-icons prefix">add</i></button>
@@ -21,12 +26,14 @@
     <thead>
         <tr>
             <td>Имя</td>
+            <td>email</td>
             <td>Действия</td>
         </tr>
     </thead>
     {{#each allgrbs}}
     <tr>
         <td>{{name}}</td>
+        <td>{{email}}</td>
         <td>
             <a href="/grbs/{{id}}/edit?allow=true"><i class="tiny material-icons">mode_edit</i></a></td>
         </td>

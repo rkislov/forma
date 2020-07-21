@@ -6,6 +6,10 @@ name: {
     type: String,
     required: true
 },
+email: {
+    type: String,
+    
+},
 })
 
 module.exports = model('Grbs', grbsSchema)

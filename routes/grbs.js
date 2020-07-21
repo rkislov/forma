@@ -30,6 +30,7 @@ router.post('/add',auth,async(req,res)=>{
             error: errors.array()[0].msg,
             data: {
                 name: req.body.name,
+                email: req.body.email,
             }
         })
 
@@ -39,6 +40,7 @@ router.post('/add',auth,async(req,res)=>{
     if(!candidate){
         const grbs = new Grbs()
         grbs.name = req.body.name
+        grbs.email = req.body.email
         await grbs.save()
         res.redirect('/grbs')
     } else {
@@ -77,6 +79,7 @@ router.post('/edit', auth, async (req,res)=>{
         delete req.body.id
         await Grbs.findByIdAndUpdate(id, {
             name: req.body.name,
+            email: req.body.email
         })
         res.redirect('/grbs')
     } catch (error) {
