@@ -1,4 +1,5 @@
 const {Schema, model} = require('mongoose')
+const { now } = require('moment')
 
 const record = new Schema({
     name: {
@@ -78,6 +79,10 @@ const record = new Schema({
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'User'
+    },
+    createdAt: {
+        type:Date,
+        default: Date.now
     }
 
 })
