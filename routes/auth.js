@@ -50,6 +50,9 @@ router.post('/login', async(req,res)=>{
             if (areSame){               
                 req.session.user = candidate           
                 req.session.isAuthenticated = true
+                if(candidate.checked === true){
+                    req.session.isChecked = true
+                }
                 req.session.save(err=>{
                     if (err) {
                         throw err

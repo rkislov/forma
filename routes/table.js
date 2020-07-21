@@ -14,7 +14,6 @@ router.get('/',auth, async (req,res) => {
     userId= req.session.user._id.toString()
     const perPage = 20
     const page =  1
-
     try {
         
         // const records = await Record.find()

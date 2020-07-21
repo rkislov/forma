@@ -35,7 +35,8 @@ const userSchema = new Schema ({
         ref: 'Grbs',    
     },
     resetToken: String,
-    resetTokenExp: Date 
+    resetTokenExp: Date,
+    checked: Boolean,
 })
 
 module.exports = model('User', userSchema)
