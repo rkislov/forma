@@ -95,129 +95,26 @@
           <span class="helper-text" data-error="Укажите место регистрации контрагента (указывается субъект РФ)"></span>
     </div>
 
-     <input type="hidden" name=id value="{{record.id}}">
-      <input type="hidden" name="_csrf" value="{{csrf}}">
-    <button type="submit" class="btn btn-primary">Редактировать</button>
-</form>
+     
 
-<form action="/records/remove" method="POST">
+
+        </div>
+        <div class="card-action">
+          <input type="hidden" name=id value="{{record.id}}">
+      <input type="hidden" name="_csrf" value="{{csrf}}">
+      <button type="submit" class="btn btn-primary">Редактировать</button>
+      </form>
+      <form action="/records/remove" method="POST">
       <input type="hidden" name="id" value="{{record.id}}">
       <input type="hidden" name="_csrf" value="{{csrf}}">
       <button class="btn red">Удалить</button>
-</form>
-        </div>
-        <div class="card-action">
-          <a href="#">This is a link</a>
-          <a href="#">This is a link</a>
+      </form>
         </div>
       </div>
     </div>
   </div>
 
 
-
-<form action="/records/edit" method="POST" class="record-form">
-    <div class="input-field">
-          <input id="name" name="name" type="text" class="validate" required value="{{record.name}}">
-          <label for="name">Заказчик (наименование,ИНН)</label>
-          <span class="helper-text" data-error="Введите название"></span>
-          
-    </div>
-
-    <div class="input-field">
-          <input id="nomer_dogovora" name="nomer_dogovora" type="text" class="validate" required value="{{record.nomer_dogovora}}">
-          <label for="nomer_dogovora">Номер договора</label>
-          <span class="helper-text" data-error="Введите номер договора"></span>
-    </div>
-    
-    <div class="input-field">
-          <input id="data_zakl_dogovora" name="data_zakl_dogovora" type="text" class="datepicker" value="{{ moment record.data_zakl_dogovora format="DD.MM.YYYY" }}">
-          <label for="data_zakl_dogovora">Дата заключения договора</label>
-          <span class="helper-text" data-error="Укажите дату"></span>
-    </div>
-      
-          <div class="input-field">
-          <input id="sposob_opredelenia" name="sposob_opredelenia" type="text" required value="{{record.sposob_opredelenia}}">
-          <label for="sposob_opredelenia">Способ определения поставщика</label>
-          <span class="helper-text" data-error="Укажите способ определения поставщика"></span>
-    </div>
-
-    <div class="input-field">
-          <input id="kod_okpd2" name="kod_okpd2" type="text" required value="{{record.kod_okpd2}}">
-          <label for="kod_okpd2">Код по ОКПД2</label>
-          <span class="helper-text" data-error="Укажите код по ОКДП2"></span>
-    </div>
-
-    <div class="input-field">
-          <input id="kod_okved2" name="kod_okved2" type="text" required value="{{record.kod_okved2}}">
-          <label for="kod_okved2">Код по ОКВЭД2</label>
-          <span class="helper-text" data-error="Укажите код по ОКВЭД2"></span>
-    </div>
-
-    <div class="input-field">
-          <input id="nac_proekt" name="nac_proekt" type="text" value="{{record.nac_proekt}}">
-          <label for="nac_proekt">Программа или Национальный проект, в рамках которого проведена закупка (при наличии)</label>
-          <span class="helper-text" data-error="Укажите программу или нац проект, в рамках которого осуществлялась закупка (при наличии)"></span>
-    </div>
-
-    <div class="input-field">
-          <input id="object" name="object" type="text"  required value="{{record.object}}">
-          <label for="object">Объект закупки (наименование товара, указать в соответсвии со спецификацией)</label>
-          <span class="helper-text" data-error="Укажите датуобъект закупки"></span>
-    </div>
-
-    <div class="input-field">
-          <input id="colichestvo" name="colichestvo" type="text" required value="{{record.colichestvo}}">
-          <label for="colichestvo">Количествово, шт.</label>
-          <span class="helper-text" data-error="Укажите количество"></span>
-    </div>
-
-    <div class="input-field">
-          <input id="price" name="price" type="text" required value="{{record.price}}">
-          <label for="price">Цена за единицу, руб.</label>
-          <span class="helper-text" data-error="Укажите цену за единицу продукции"></span>
-    </div>
-
-    <div class="input-field">
-          <input id="celi" name="celi" type="text" required value="{{record.celi}}">
-          <label for="celi">Цели, для достижения которых проведена закупка с указанием показателей в натуральном</label>
-          <span class="helper-text" data-error="Укажите цели, для достижения которых проведена закупка с указанием показателей в натуральном"></span>
-    </div>
-
-    <div class="input-field">
-          <input id="marki" name="marki" type="text" required value="{{record.marki}}">
-          <label for="marki">Конкретные марки и модели</label>
-          <span class="helper-text" data-error="Укажите конкретные марки и модели"></span>
-    </div>
-
-    <div class="input-field">
-          <input id="name_kontragent" name="name_kontragent" type="text" required value="{{record.name_kontragent}}">
-          <label for="name_kontragent">Наименование контрагента</label>
-          <span class="helper-text" data-error="Укажите наименование контрагента"></span>
-    </div>
-
-    <div class="input-field">
-          <input id="inn_kontragent" name="inn_kontragent" type="text" required value="{{record.inn_kontragent}}">
-          <label for="inn_kontragent">ИНН контрагента</label>
-          <span class="helper-text" data-error="Укажите ИНН контрагента"></span>
-    </div>
-
-    <div class="input-field">
-          <input id="mesto_kontragenta" name="mesto_kontragenta" type="text" required value="{{record.mesto_kontragenta}}">
-          <label for="mesto_kontragenta">Место регистрации контрагента (указывается субъект РФ)</label>
-          <span class="helper-text" data-error="Укажите место регистрации контрагента (указывается субъект РФ)"></span>
-    </div>
-
-     <input type="hidden" name=id value="{{record.id}}">
-      <input type="hidden" name="_csrf" value="{{csrf}}">
-    <button type="submit" class="btn btn-primary">Редактировать</button>
-</form>
-
-<form action="/records/remove" method="POST">
-      <input type="hidden" name="id" value="{{record.id}}">
-      <input type="hidden" name="_csrf" value="{{csrf}}">
-      <button class="btn red">Удалить</button>
-</form>
 
 
 
