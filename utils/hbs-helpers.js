@@ -8,7 +8,11 @@ module.exports = {
         return options.inverse(this)
     },
 moment,
-paginate
+paginate,
+counter(index, forIndex) {
+    return index = forIndex - (index + 1)
+}
+
 }
 
 

@@ -24,7 +24,7 @@ router.get('/',auth, async (req,res) => {
         .skip((perPage*page)- perPage)
         .limit(perPage)
         const pageCount = await Record.countDocuments()
-    
+        const forIndex = pageCount - (perPage*page)
                
             res.render('table', {
             title: 'Просмотр данных',
@@ -33,6 +33,7 @@ router.get('/',auth, async (req,res) => {
             records,
             userId,
             isAll: true,
+            forIndex,
             pagination: {
                 page,       // The current page the user is on
                 pageCount  // The total number of available pages
@@ -60,6 +61,7 @@ router.get('/page/:page',auth, async (req,res) => {
         .skip((perPage*page)- perPage)
         .limit(perPage)
         const pageCount = await Record.countDocuments()
+        const forIndex = pageCount - (perPage*page)
     
                
             res.render('table', {
@@ -69,6 +71,7 @@ router.get('/page/:page',auth, async (req,res) => {
             records,
             userId,
             isAll: true,
+            forIndex,
             pagination: {
                 page,       // The current page the user is on
                 pageCount  // The total number of available pages
@@ -96,6 +99,7 @@ router.get('/my',auth, async (req,res) => {
         .skip((perPage*page)- perPage)
         .limit(perPage)
         const pageCount = await Record.countDocuments()
+        const forIndex = pageCount - (perPage*page)
     
                
             res.render('table', {
@@ -105,6 +109,7 @@ router.get('/my',auth, async (req,res) => {
             records,
             userId,
             isMy: true,
+            forIndex,
             pagination: {
                 page,       // The current page the user is on
                 pageCount  // The total number of available pages
@@ -131,7 +136,8 @@ router.get('/my/page/:page',auth, async (req,res) => {
         .skip((perPage*page)- perPage)
         .limit(perPage)
         const pageCount = await Record.countDocuments()
-    
+        const forIndex = pageCount - (perPage*page)
+        
                
             res.render('table', {
             title: 'Просмотр данных',
@@ -140,6 +146,7 @@ router.get('/my/page/:page',auth, async (req,res) => {
             records,
             userId,
             isMy: true,
+            forIndex,
             pagination: {
                 page,       // The current page the user is on
                 pageCount  // The total number of available pages

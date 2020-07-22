@@ -26,9 +26,6 @@
             </h1>
             
     </div>
-    
-    
-    
 {{/ifeq}}
 
 {{#if records.length}}
@@ -36,7 +33,7 @@
 <table class="highlight centered col 12">
     <thead>
         <tr>
-            {{!-- <th>№ п/п</th> --}}
+            <th>№ п/п</th>
             <th>Заказчик (наименование, ИНН)</th>
             <th>Номер договора/контракта  в ЕИС</th>
             <th>Дата заключения договора/контракта</th>
@@ -48,8 +45,8 @@
     </thead>
 {{#each records}}  
     <tr>
-        {{!-- <td>#</td> --}}
-        <td>{{ name }}, {{inn}} </td>
+        <td>{{counter @index @root.forIndex}} </td>
+        <td>{{ name }}, {{ inn }} </td>
         <td>{{ nomer_dogovora }} </td>
         <td>{{ moment data_zakl_dogovora format="DD.MM.YYYY" }} г.</td>
         <td> {{object}} </td>
@@ -61,7 +58,7 @@
               <a href="/records/{{id}}/edit?allow=true"><i class="tiny material-icons">mode_edit</i></a>
               <a href="/records/remove/{{id}}"><i class="tiny material-icons">block</i></a>
             {{/ifeq}}
-       </td>
+        </td>
     </tr>
 {{/each}}
 
