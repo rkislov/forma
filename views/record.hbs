@@ -135,19 +135,34 @@
             <div>
                   <h5>Наименование контрагента</h5>
                   <blockquote>
-                        {{record.name_kontragent}}
+                  {{#ifeq record.name_kontragent 0 }}
+                        -
+                  {{else}}
+                  {{record.name_kontragent}}
+                  {{/ifeq}}
+                        
                   </blockquote>
             </div>
             <div>
                   <h5>ИНН контрагента</h5>
                   <blockquote>
-                        {{record.inn_kontragent}}
+                  {{#ifeq record.inn_kontragent 0 }}
+                        -
+                  {{else}}
+                  {{record.inn_kontragent}}
+                  {{/ifeq}}
+                        
                   </blockquote>
             </div>
             <div>
                   <h5>Место регистрации контрагента (указывается субъект РФ)</h5>
                   <blockquote>
-                        {{record.mesto_kontragenta}}
+                  {{#ifeq record.mesto_kontragenta 0 }}
+                        -
+                  {{else}}
+                  {{record.record.mesto_kontragenta}}
+                  {{/ifeq}}
+                        
                   </blockquote>
             </div>
 

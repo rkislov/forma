@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col s12 m6">
+    <div class="col s12 s6">
       <div class="card">
         <div class="card-content">
           <span class="card-title"><h1>Редактировать данные</h1></span>
@@ -100,10 +100,11 @@
 
         </div>
         <div class="card-action">
-          <input type="hidden" name=id value="{{record.id}}">
+      <input type="hidden" name=id value="{{record.id}}">
       <input type="hidden" name="_csrf" value="{{csrf}}">
       <button type="submit" class="btn btn-primary">Редактировать</button>
       </form>
+      
       <form action="/records/remove" method="POST">
       <input type="hidden" name="id" value="{{record.id}}">
       <input type="hidden" name="_csrf" value="{{csrf}}">
