@@ -24,7 +24,7 @@ router.get('/',auth, async (req,res) => {
         .skip((perPage*page)- perPage)
         .limit(perPage)
         const pageCount = await Record.countDocuments()
-        const forIndex = pageCount - (perPage*page)
+        const forIndex = pageCount 
                
             res.render('table', {
             title: 'Просмотр данных',
@@ -99,7 +99,7 @@ router.get('/my',auth, async (req,res) => {
         .skip((perPage*page)- perPage)
         .limit(perPage)
         const pageCount = await  Record.countDocuments({_id: userId})
-        const forIndex = pageCount - (perPage*page)
+        const forIndex = pageCount 
     
                
             res.render('table', {
