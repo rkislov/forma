@@ -2,6 +2,7 @@ const {Router} = require('express')
 const auth = require('../middleware/auth')
 const {validationResult} = require('express-validator')
 const Grbs = require('../models/grbs')
+const User = require('../models/user')
 const router = Router()
 
 
@@ -86,6 +87,32 @@ router.post('/edit', auth, async (req,res)=>{
         console.log(error)
     }
     
+    
+})
+router.get('/searchemail', async (req,res) =>{
+    try {
+        const q = req.body.query
+    const query = {
+        "$or" : [{"name": {"$regex": q, "$options":"q"}}, {"email": {"$regex": q, "$options":"q"}}]
+    }
+    const output = []
+    await User.find(query).limit(4).then( usrs =>{
+        if(usrs && usrs.length && usrs.length >0) {
+            usrs.forEach(user => {
+                const obj = {
+                    id: user.name + ' ' + user.email,
+                    label: user.name + ' ' + user.email,
+                }
+                output.push(obj)
+            })
+        }
+        res.json(output)
+    }).catch(err => {
+        res.sendStatus(404)
+    })
+    } catch (error) {
+        console.log(error)
+    }
     
 })
 module.exports = router
