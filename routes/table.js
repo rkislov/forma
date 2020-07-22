@@ -98,8 +98,9 @@ router.get('/my',auth, async (req,res) => {
         .populate('userId','email name')
         .skip((perPage*page)- perPage)
         .limit(perPage)
-        const pageCount = await  Record.countDocuments({_id: userId})
-        const forIndex = pageCount 
+        const pageCount = await  Record.countDocuments()
+        const pageCountForIndex = await  Record.countDocuments({userId})
+        const forIndex = pageCountForIndex 
     
                
             res.render('table', {
@@ -135,8 +136,9 @@ router.get('/my/page/:page',auth, async (req,res) => {
         .populate('userId','email name')
         .skip((perPage*page)- perPage)
         .limit(perPage)
-        const pageCount = await Record.countDocuments({_id: userId})
-        const forIndex = pageCount - (perPage*page)
+        const pageCount = await Record.countDocuments()
+        const pageCountForIndex = await  Record.countDocuments({userId})
+        const forIndex = pageCountForIndex - (perPage*page)
         
                
             res.render('table', {
