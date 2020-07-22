@@ -21,6 +21,7 @@ router.post('/',auth,  async (req,res)=> {
     const parts = req.body.data_zakl_dogovora.split('.')
     const date = new Date(parts[2],parts[1]-1,parts[0])
     const errors = validationResult(req)
+    console.log(req.body.price)
     console.log(req.body.price.replace(/,/g, '.'))
     if(!errors.isEmpty()){
         return res.status(422).render('add', {
