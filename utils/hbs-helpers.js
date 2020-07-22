@@ -10,7 +10,7 @@ module.exports = {
 moment,
 paginate,
 counter(index, forIndex) {
-    return index = forIndex - (index + 1)
+    return index = forIndex - index 
 }
 
 }

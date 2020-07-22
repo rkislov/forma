@@ -98,8 +98,8 @@ router.get('/my',auth, async (req,res) => {
         .populate('userId','email name')
         .skip((perPage*page)- perPage)
         .limit(perPage)
-        const pageCount = await  Record.countDocuments()
-        const pageCountForIndex = await  Record.countDocuments({userId})
+        const pageCount = await Record.countDocuments()
+        const pageCountForIndex = await  Record.find({userId}).count()
         const forIndex = pageCountForIndex 
     
                
