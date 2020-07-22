@@ -187,7 +187,7 @@ router.get('/:id/edit',auth,async (req,res) =>{
 })
 
 router.post('/remove',auth, async (req,res)=>{
-    console.log(req.body)
+    
     const {id} = req.body
    
     try {
