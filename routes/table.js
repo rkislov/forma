@@ -184,7 +184,7 @@ router.get('/:id/edit',auth,async (req,res) =>{
 
 })
 
-router.post('/remove/:id',auth, async (req,res)=>{
+router.get('/remove/:id',auth, async (req,res)=>{
     try {
         await Record.deleteOne({
             _id: req.body.id,
