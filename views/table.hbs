@@ -58,6 +58,7 @@
         <td><a href="/records/{{id}}"><i class="tiny material-icons">remove_red_eye</i></a>
         {{#ifeq userId._id @root.userId}}
             <a href="/records/{{id}}/edit?allow=true"><i class="tiny material-icons">mode_edit</i></a></td>
+            <a href="/records/remove/{{id}}"><i class="tiny material-icons">block</i></a></td>
         {{/ifeq}}
        
     </tr>
