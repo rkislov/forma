@@ -187,8 +187,7 @@ router.get('/:id/edit',auth,async (req,res) =>{
 router.get('/remove/:id',auth, async (req,res)=>{
     try {
         await Record.deleteOne({
-            _id: req.body.id,
-            userId: req.session.user._id
+            _id: req.body.id
         })      
         res.redirect('/records')  
     } catch (error) {
