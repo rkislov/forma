@@ -86,7 +86,7 @@ router.get('/page/:page',auth, async (req,res) => {
 })  
 
 router.get('/my',auth, async (req,res) => {
-    userId= req.session.user._id.toString()
+    userId = req.session.user._id.toString()
     const perPage = 20
     const page =  1
 
