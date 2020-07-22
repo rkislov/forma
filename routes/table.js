@@ -98,7 +98,7 @@ router.get('/my',auth, async (req,res) => {
         .populate('userId','email name')
         .skip((perPage*page)- perPage)
         .limit(perPage)
-        const pageCount = await Record.countDocuments()
+        const pageCount = await  Record.countDocuments({_id: userId})
         const forIndex = pageCount - (perPage*page)
     
                
@@ -135,7 +135,7 @@ router.get('/my/page/:page',auth, async (req,res) => {
         .populate('userId','email name')
         .skip((perPage*page)- perPage)
         .limit(perPage)
-        const pageCount = await Record.countDocuments()
+        const pageCount = await Record.countDocuments({_id: userId})
         const forIndex = pageCount - (perPage*page)
         
                
@@ -184,7 +184,7 @@ router.get('/:id/edit',auth,async (req,res) =>{
 
 })
 
-router.post('/remove',auth, async (req,res)=>{
+router.post('/remove/:id',auth, async (req,res)=>{
     try {
         await Record.deleteOne({
             _id: req.body.id,
