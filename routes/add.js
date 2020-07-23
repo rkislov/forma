@@ -21,6 +21,7 @@ router.post('/',auth,  async (req,res)=> {
     const parts = req.body.data_zakl_dogovora.split('.')
     const date = new Date(parts[2],parts[1]-1,parts[0])
     const errors = validationResult(req)
+    const truprice =  req.body.price.replace(/,/g, '.')
     if(!errors.isEmpty()){
         return res.status(422).render('add', {
             title: 'Добавление данных',
@@ -38,8 +39,8 @@ router.post('/',auth,  async (req,res)=> {
                 nac_proekt: req.body.nac_proekt,
                 object: req.body.object,
                 colichestvo: req.body.colichestvo,
-                price: req.body.price.replace(/,/g, '.'),
-                full_price: req.body.price.replace(/,/g, '.')*req.body.colichestvo,
+                price: truprice,
+                full_price: truprice*req.body.colichestvo,
                 celi: req.body.celi,
                 marki: req.body.marki,
                 analiz: req.body.analiz,
@@ -64,8 +65,8 @@ router.post('/',auth,  async (req,res)=> {
         nac_proekt: req.body.nac_proekt,
         object: req.body.object,
         colichestvo: req.body.colichestvo,
-        price: req.body.price.replace(/,/g, '.'),
-        full_price: req.body.price.replace(/,/g, '.')*req.body.colichestvo,
+        price: truprice,
+        full_price: truprice*req.body.colichestvo,
         celi: req.body.celi,
         marki: req.body.marki,
         analiz: req.body.analiz,
