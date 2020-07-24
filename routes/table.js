@@ -213,7 +213,7 @@ router.post('/edit', auth, async (req,res)=>{
         
         const parts = req.body.data_zakl_dogovora.split('.')
         const date = new Date(parts[2],parts[1]-1,parts[0])
-        
+        const trueprice = req.body.price.replace(/ /g, '').replace(/,/g, '.').trim()
         await Record.findByIdAndUpdate(id, {
             name: req.body.name,
             inn: req.body.inn,
@@ -225,7 +225,7 @@ router.post('/edit', auth, async (req,res)=>{
             nac_proekt: req.body.nac_proekt,
             object: req.body.object,
             colichestvo: req.body.colichestvo,
-            price: req.body.price,
+            price: trueprice,
             full_price: req.body.price*req.body.colichestvo,
             celi: req.body.celi,
             marki: req.body.marki,
