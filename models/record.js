@@ -40,14 +40,17 @@ const record = new Schema({
     },
     colichestvo: {
         type: Number,
+        default: 1
         
     },
     price: {
         type: Number,
+        default: 0
        
     },
     full_price: {
         type: Number,
+        default: 0
         
     },
     celi: {
