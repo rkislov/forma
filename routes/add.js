@@ -66,7 +66,7 @@ router.post('/',auth,  async (req,res)=> {
         object: req.body.object,
         colichestvo: req.body.colichestvo,
         price: trueprice,
-        full_price: truprice*req.body.colichestvo,
+        full_price: trueprice*req.body.colichestvo,
         celi: req.body.celi,
         marki: req.body.marki,
         analiz: req.body.analiz,

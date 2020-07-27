@@ -1,8 +1,8 @@
 <div class="row">
-    <div class="col s5">
+    <div class="col s3">
         <h1 >Записи</h1>
     </div>
-    <div class="col s2">
+    <div class="col s4">
       <h1>
       {{#if isAll}}
       <a class="waves-effect waves-light btn green darken-1 disabled" >Все</a>  
@@ -14,6 +14,11 @@
       {{else}}
       <a class="waves-effect waves-light btn green darken-1" href="/records/my">Мои</a>
       {{/if}}
+      {{!-- {{#if isMyDep}}
+      <a class="waves-effect waves-light btn green darken-1 disabled">Моя организация</a>
+      {{else}}
+      <a class="waves-effect waves-light btn green darken-1" href="/records/mydep">Моя организация</a>
+      {{/if}} --}}
       </h1>
     </div>  
     {{#ifeq userRole 'admin'}}
