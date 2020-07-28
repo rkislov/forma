@@ -72,6 +72,47 @@ router.post('/add',auth,async(req,res)=>{
     }
 
 })
+router.get('/:id',auth,async (req,res) =>{
+   
+
+    try {
+        const grbs = await Grbs.findById(req.params.id)
+
+            res.render('grbs/view',{
+            title: `редактирование ${grbs.name}`,
+            grbs
+        })
+        const departments = await User.aggregate([
+            // { $match: { grbsIg: req.params.id } },
+            {
+            
+            $lookup:{
+                from: 'departments',
+                localField: 'departmentId',
+                foreignField: '_id',
+                as: 'dep'
+            }},
+            // {
+            //     $lookup:{
+            //         from: 'records',
+            //         localField: '_id',
+            //         foreignField: 'userId',
+            //         as: 'deprecords'
+            //     }
+            // }
+            {
+                $unwind: {
+                  path: "$dep",
+                  preserveNullAndEmptyArrays: false
+                }
+              },
+        ]).limit(10)
+    console.log(departments)
+    } catch (error) {
+        console.log(error)
+    }
+
+})
 
 router.post('/edit', auth, async (req,res)=>{
     try {
