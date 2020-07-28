@@ -37,6 +37,10 @@ const userSchema = new Schema ({
     resetToken: String,
     resetTokenExp: Date,
     checked: Boolean,
+    delete: {
+        type:Boolean,
+        default: false
+    }
 })
 
 userSchema.virtual('depname',{

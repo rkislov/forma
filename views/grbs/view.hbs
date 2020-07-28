@@ -18,26 +18,92 @@
                 </blockquote>
                 
             </div>
-    
-    
-<div class="card-action">
-      <table class="highlight centered col s6">
+
+      <div class="card-tabs">
+      <ul class="tabs tabs-fixed-width">
+        <li class="tab"><a class="active" href="#old">Подведы</a></li>
+        <li class="tab"><a  href="#new">Новые</a></li>
+      </ul>
+    </div>
+    <div class="card-content grey lighten-4">
+      <div id="old">
+      {{#if departments.length}}   
+
+      <table class="">
     <thead>
-      <tr>
+          <tr>
+            <th>Название</th>
+            <th>ФИО ответсвенного</th>
+            <th>email</th>
       </tr>
      </thead>
      <tbody>
-           <td></td>
-           <td></td>
+{{#each departments}}
+      <tr>
+           <td>{{departmentId.name}}</td>
+           <td>{{name}}</td>
+           <td>{{email}}</td>
+      </tr>
      </tbody>
+{{/each}}
      </table>
-</div>
-    
 
+{{else}}
+<blockquote>
+      <h5>Нет ни одной подведеномственной организации</h5>
+</blockquote>
+
+{{/if}}
+
+      </div>
+      <div id="new">
+                  {{#if departmentsnew.length}}   
+
+      <table class="">
+    <thead>
+          <tr>
+            <th>Название</th>
+            <th>ФИО ответсвенного</th>
+            <th>email</th>
+            <th>Действия</th>
+      </tr>
+     </thead>
+     <tbody>
+{{#each departmentsnew}}
+      <tr>
+           <td>{{departmentId.name}}</td>
+           <td>{{name}}</td>
+           <td>{{email}}</td>
+           <td>
+                 <a href="/users/approve/{{_id}}"><i class="tiny material-icons">check</i></a>
+                 <a href="/users/remove/{{_id}}"><i class="tiny material-icons">close</i></a>
+
+           </td>
+      </tr>
+     </tbody>
+{{/each}}
+     </table>
+
+{{else}}
+<blockquote>
+      <h5>Все проверенны </h5>
+</blockquote>
+
+{{/if}}
+      </div>
+    </div>
+  </div>
+
+      </div>            
+ 
+
+
+
+ 
 </div>
 </div>
 </div>
-</div>
+
 
 
 

@@ -202,4 +202,28 @@ router.post('/adduser', registerValidators, async (req,res)=>{
         console.log(error)
     }
 })
+
+router.get('/approve/:id', async (req,res)=>{
+    console.log(req.body)
+    try {
+        const user = await User.findOne({_id: req.params.id})
+        user.checked = 1
+        await user.save()
+        res.redirect('/grbs/'+user.grbsId.toString())
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+router.get('/remove/:id', async (req,res)=>{
+    console.log(req.body)
+    try {
+        const user = await User.findOne({_id: req.params.id})
+        user.delete = true
+        await user.save()
+        res.redirect('/grbs/'+user.grbsId.toString())
+    } catch (error) {
+        console.log(error)
+    }
+})
 module.exports = router

@@ -77,37 +77,16 @@ router.get('/:id',auth,async (req,res) =>{
 
     try {
         const grbs = await Grbs.findById(req.params.id)
-
+        const departments = await User.find({grbsId: grbs._id, checked: true}).populate('departmentId')
+        const departmentsnew = await User.find({grbsId: grbs._id, checked: false, delete: false}).populate('departmentId')
             res.render('grbs/view',{
-            title: `редактирование ${grbs.name}`,
-            grbs
+            title: `просмотр ${grbs.name}`,
+            grbs,
+            departments,
+            departmentsnew
         })
-        const departments = await User.aggregate([
-            // { $match: { grbsIg: req.params.id } },
-            {
-            
-            $lookup:{
-                from: 'departments',
-                localField: 'departmentId',
-                foreignField: '_id',
-                as: 'dep'
-            }},
-            // {
-            //     $lookup:{
-            //         from: 'records',
-            //         localField: '_id',
-            //         foreignField: 'userId',
-            //         as: 'deprecords'
-            //     }
-            // }
-            {
-                $unwind: {
-                  path: "$dep",
-                  preserveNullAndEmptyArrays: false
-                }
-              },
-        ]).limit(10)
-    console.log(departments)
+       
+    
     } catch (error) {
         console.log(error)
     }
