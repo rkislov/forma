@@ -21,6 +21,7 @@ router.post('/',auth,  async (req,res)=> {
     const parts = req.body.data_zakl_dogovora.split('.')
     const date = new Date(parts[2],parts[1]-1,parts[0])
     const errors = validationResult(req)
+    const truecolichestvo = req.body.colichestvo.replace(/ /g, '').replace(/,/g, '.').trim()
     const trueprice =  req.body.price.replace(/ /g, '').replace(/,/g, '.').trim()
     if(!errors.isEmpty()){
         return res.status(422).render('add', {
@@ -38,7 +39,7 @@ router.post('/',auth,  async (req,res)=> {
                 kod_okved2: req.body.kod_okved2,
                 nac_proekt: req.body.nac_proekt,
                 object: req.body.object,
-                colichestvo: req.body.colichestvo,
+                colichestvo: truecolichestvo,
                 price: trueprice,
                 full_price: truprice*req.body.colichestvo,
                 celi: req.body.celi,
@@ -64,7 +65,7 @@ router.post('/',auth,  async (req,res)=> {
         kod_okved2: req.body.kod_okved2,
         nac_proekt: req.body.nac_proekt,
         object: req.body.object,
-        colichestvo: req.body.colichestvo,
+        colichestvo: truecolichestvo,
         price: trueprice,
         full_price: trueprice*req.body.colichestvo,
         celi: req.body.celi,
