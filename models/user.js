@@ -39,4 +39,11 @@ const userSchema = new Schema ({
     checked: Boolean,
 })
 
+userSchema.virtual('depname',{
+    ref: 'departments',
+    localField: 'departmentId',
+    foreignField: '_id',
+    justOne: true
+})
+
 module.exports = model('User', userSchema)

@@ -1,9 +1,9 @@
 const {Router} = require('express')
 const Record = require('../models/record')
 const User = require('../models/user')
+const Department = require('../models/department')
 const router = Router()
 const auth = require('../middleware/auth')
-const user = require('../models/user')
 
 
 
@@ -169,21 +169,24 @@ router.get('/my/page/:page',auth, async (req,res) => {
 router.get('/mydep',auth, async (req,res) => {
     console.log(req.session)
     userId = req.session.user._id.toString()
-    departmentId = req.session.user.departmentId.toString()
-    users = User.find(departmentId)
+    depId = req.session.user.departmentId.toString()
+    //users = User.find(depId)
     const perPage = 20
     const page =  1
 
     try {
         
-        // const records = await Record.find()
-        // .populate('userId','email name')
-        const records = []
-        for (const i=0; i < users.length; i++){
-            const rec = Record.find({userId: user[i]._id}).populate('userId','email name').skip((perPage*page)- perPage).limit(perPage)
-            console.log(rec)
-            records.push(rec) 
-        }
+        const records = await Record.find().populate({
+            path: 'userId',
+            match: {departmentId: depId},
+            populate: {
+                path: 'departmentId',
+                                
+            }
+        }).limit(20)
+        
+        
+        
         console.log(records)
       
         

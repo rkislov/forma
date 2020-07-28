@@ -29,7 +29,7 @@ exports.registerValidators = [
 ]
 
 exports.recordValidator= [
-    body('price').isNumeric().withMessage('Введите корректную цену')
+    //body('price').isNumeric().withMessage('Введите корректную цену')
 ]
 
 exports.grbsValidators = [
