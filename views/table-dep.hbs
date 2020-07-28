@@ -59,9 +59,9 @@
         <td> {{deprecords.name_kontragent}} </td>
         <td>
             <a href="/records/{{deprecords._id}}"><i class="tiny material-icons">remove_red_eye</i></a>
-            {{#ifeq userId._id @root.userId}}
-              <a href="/records/{{deprecords._id}}/edit?allow=true"><i class="tiny material-icons">mode_edit</i></a>
-            {{/ifeq}}
+            
+            <a href="/records/{{deprecords._id}}/edit?allow=true"><i class="tiny material-icons">mode_edit</i></a>
+            
         </td>
     </tr>
 {{/each}}

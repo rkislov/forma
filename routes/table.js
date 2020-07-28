@@ -344,9 +344,9 @@ router.get('/:id/edit',auth,async (req,res) =>{
     try {
         const record = await Record.findById(req.params.id)
 
-        if(!isOwner(record, req)) {
-            return res.redirect('/records')
-        }
+        // if(!isOwner(record, req)) {
+        //     return res.redirect('/records')
+        // }
         res.render('record-edit',{
             title: `редактирование ${record.name}`,
             record
@@ -385,6 +385,7 @@ router.post('/edit', auth, async (req,res)=>{
         
         const parts = req.body.data_zakl_dogovora.split('.')
         const date = new Date(parts[2],parts[1]-1,parts[0])
+        const truecolichestvo = req.body.colichestvo.replace(/ /g, '').replace(/,/g, '.').trim()
         const trueprice = req.body.price.replace(/ /g, '').replace(/,/g, '.').trim()
         await Record.findByIdAndUpdate(id, {
             name: req.body.name,
@@ -396,7 +397,7 @@ router.post('/edit', auth, async (req,res)=>{
             kod_okved2: req.body.kod_okved2,
             nac_proekt: req.body.nac_proekt,
             object: req.body.object,
-            colichestvo: req.body.colichestvo,
+            colichestvo: truecolichestvo,
             price: trueprice,
             full_price: req.body.price*req.body.colichestvo,
             celi: req.body.celi,
