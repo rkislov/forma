@@ -64,7 +64,7 @@ router.get('/page/:page',auth, async (req,res) => {
         .skip((perPage*page)- perPage)
         .limit(perPage)
         const pageCount = await Record.countDocuments()
-        const forIndex = pageCount - (perPage*page)
+        const forIndex = pageCount - (perPage*page) +perPage
     
                
             res.render('table', {
@@ -139,9 +139,9 @@ router.get('/my/page/:page',auth, async (req,res) => {
         .populate('userId','email name')
         .skip((perPage*page)- perPage)
         .limit(perPage)
-        const pageCount = await Record.countDocuments()
+        const pageCount = await Record.countDocuments({userId})
         const pageCountForIndex = await  Record.countDocuments({userId})
-        const forIndex = pageCountForIndex - (perPage*page)
+        const forIndex = pageCountForIndex - (perPage*page) + perPage
         
                
             res.render('table', {
@@ -167,39 +167,70 @@ router.get('/my/page/:page',auth, async (req,res) => {
 
 
 router.get('/mydep',auth, async (req,res) => {
-    console.log(req.session)
     userId = req.session.user._id.toString()
-    depId = req.session.user.departmentId.toString()
-    //users = User.find(depId)
+    depId = req.session.user.departmentId
     const perPage = 20
     const page =  1
-
-    try {
-        
-        const records = await Record.find().populate({
-            path: 'userId',
-            match: {departmentId: depId},
-            populate: {
-                path: 'departmentId',
-                                
-            }
-        }).limit(20)
-        
-        
-        
-        console.log(records)
-      
-        
-        // await Record.find({userId})
-        // .populate('userId','email name')
-        // .skip((perPage*page)- perPage)
-        // .limit(perPage)
-        const pageCount = await Record.countDocuments()
-        const pageCountForIndex = await  Record.countDocuments({userId})
-        const forIndex = pageCountForIndex 
     
+    try {
+        const skip = ((perPage*page)- perPage)
+        const records = await User.aggregate([
+            { $match: { departmentId: depId } },
+            {
+            
+            $lookup:{
+                from: 'departments',
+                localField: 'departmentId',
+                foreignField: '_id',
+                as: 'dep'
+            }},
+            {
+                $lookup:{
+                    from: 'records',
+                    localField: '_id',
+                    foreignField: 'userId',
+                    as: 'deprecords'
+                }
+            },{
+                $unwind: {
+                  path: "$deprecords",
+                  preserveNullAndEmptyArrays: false
+                }
+              },
+        ]).skip((perPage*page)- perPage).limit(perPage)
+        const pageCountAll = await User.aggregate([
+            { $match: { departmentId: depId } },
+            {
+            
+            $lookup:{
+                from: 'departments',
+                localField: 'departmentId',
+                foreignField: '_id',
+                as: 'dep'
+            }},
+            {
+                $lookup:{
+                    from: 'records',
+                    localField: '_id',
+                    foreignField: 'userId',
+                    as: 'deprecords'
+                }
+            },{
+                $unwind: {
+                  path: "$deprecords",
+                  preserveNullAndEmptyArrays: false
+                }
+              },
+              {
+                  $count: "docs_count"
+              }
+        ])
+        const pageCount = pageCountAll[0].docs_count
+        const pageCountForIndex = pageCount
+        const forIndex = pageCountForIndex - (perPage*page)+perPage
+        
                
-            res.render('table', {
+            res.render('table-dep', {
             title: 'Просмотр данных',
             isTable: true,
             userRole: req.session.user ? req.session.user.role : null,
@@ -221,41 +252,87 @@ router.get('/mydep',auth, async (req,res) => {
 })  
 router.get('/mydep/page/:page',auth, async (req,res) => {
     userId= req.session.user._id.toString()
+    depId = req.session.user.departmentId
     const perPage = 20
     const page = req.params.page || 1
 
-    try {
-        
-        // const records = await Record.find()
-        // .populate('userId','email name')
-        const records = await Record.find({userId})
-        .populate('userId','email name')
-        .skip((perPage*page)- perPage)
-        .limit(perPage)
-        const pageCount = await Record.countDocuments()
-        const pageCountForIndex = await  Record.countDocuments({userId})
-        const forIndex = pageCountForIndex - (perPage*page)
-        
-               
-            res.render('table', {
-            title: 'Просмотр данных',
-            isTable: true,
-            userRole: req.session.user ? req.session.user.role : null,
-            records,
-            userId,
-            isMy: true,
-            forIndex,
-            pagination: {
-                page,       // The current page the user is on
-                pageCount  // The total number of available pages
-              }
+       try {
+               const records = await User.aggregate([
+                { $match: { departmentId: depId } },
+                {
+                
+                $lookup:{
+                    from: 'departments',
+                    localField: 'departmentId',
+                    foreignField: '_id',
+                    as: 'dep'
+                }},
+                {
+                    $lookup:{
+                        from: 'records',
+                        localField: '_id',
+                        foreignField: 'userId',
+                        as: 'deprecords'
+                    }
+                },{
+                    $unwind: {
+                      path: "$deprecords",
+                      preserveNullAndEmptyArrays: false
+                    }
+                  },
+            ]).skip((perPage*page)- perPage).limit(perPage)
             
-                                 
-        })
+            const pageCountAll = await User.aggregate([
+                { $match: { departmentId: depId } },
+                {
+                
+                $lookup:{
+                    from: 'departments',
+                    localField: 'departmentId',
+                    foreignField: '_id',
+                    as: 'dep'
+                }},
+                {
+                    $lookup:{
+                        from: 'records',
+                        localField: '_id',
+                        foreignField: 'userId',
+                        as: 'deprecords'
+                    }
+                },{
+                    $unwind: {
+                      path: "$deprecords",
+                      preserveNullAndEmptyArrays: false
+                    }
+                  },
+                  {
+                      $count: "docs_count"
+                  }
+            ])
+            const pageCount = pageCountAll[0].docs_count
+            const pageCountForIndex = pageCount
+            const forIndex = pageCountForIndex - (perPage*page) + perPage
             
-    } catch (error) {
-        console.log(error)
-    }
+                   
+                res.render('table-dep', {
+                title: 'Просмотр данных',
+                isTable: true,
+                userRole: req.session.user ? req.session.user.role : null,
+                records,
+                userId,
+                isMyDep: true,
+                forIndex,
+                pagination: {
+                    page,       // The current page the user is on
+                    pageCount  // The total number of available pages
+                  }
+                
+                                     
+            })
+                
+        } catch (error) {
+            console.log(error)
+        }
 }) 
 
 

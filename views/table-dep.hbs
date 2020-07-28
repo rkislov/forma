@@ -51,16 +51,16 @@
 {{#each records}}  
     <tr>
         <td>{{counter @index @root.forIndex}} </td>
-        <td>{{ name }}, {{ inn }} </td>
-        <td>{{ nomer_dogovora }} </td>
-        <td>{{ moment data_zakl_dogovora format="DD.MM.YYYY" }} г.</td>
-        <td> {{object}} </td>
-        <td class="price"> {{full_price}} </td>
-        <td> {{name_kontragent}} </td>
+        <td>{{ deprecords.name }}, {{ deprecords.inn }} </td>
+        <td>{{ deprecords.nomer_dogovora }} </td>
+        <td>{{ moment deprecords.data_zakl_dogovora format="DD.MM.YYYY" }} г.</td>
+        <td> {{deprecords.object}} </td>
+        <td class="price"> {{deprecords.full_price}} </td>
+        <td> {{deprecords.name_kontragent}} </td>
         <td>
-            <a href="/records/{{id}}"><i class="tiny material-icons">remove_red_eye</i></a>
+            <a href="/records/{{deprecords._id}}"><i class="tiny material-icons">remove_red_eye</i></a>
             {{#ifeq userId._id @root.userId}}
-              <a href="/records/{{id}}/edit?allow=true"><i class="tiny material-icons">mode_edit</i></a>
+              <a href="/records/{{deprecords._id}}/edit?allow=true"><i class="tiny material-icons">mode_edit</i></a>
             {{/ifeq}}
         </td>
     </tr>
@@ -93,13 +93,13 @@
 <div class="pagination pagination-centered">
   <ul>
     {{#paginate pagination type="previous"}}
-      <li {{#if disabled}}class="disabled"{{/if}}><a href="/records/my/page/{{n}}"><i class="material-icons">chevron_left</i></a></li>
+      <li {{#if disabled}}class="disabled"{{/if}}><a href="/records/mydep/page/{{n}}"><i class="material-icons">chevron_left</i></a></li>
     {{/paginate}}
     {{#paginate pagination type="middle" limit="3"}}
-      <li {{#if active}}class="active green darken-1"{{/if}}><a href="/records/my/page/{{n}}">{{n}}</a></li>
+      <li {{#if active}}class="active green darken-1"{{/if}}><a href="/records/mydep/page/{{n}}">{{n}}</a></li>
     {{/paginate}}
     {{#paginate pagination type="next"}}
-      <li {{#if disabled}}class="disabled"{{/if}}><a href="/records/my/page/{{n}}"><i class="material-icons">chevron_right</i></a></li>
+      <li {{#if disabled}}class="disabled"{{/if}}><a href="/records/mydep/page/{{n}}"><i class="material-icons">chevron_right</i></a></li>
     {{/paginate}}
   </ul>
 </div>
