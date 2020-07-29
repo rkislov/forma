@@ -15,10 +15,10 @@ function isOwner(record, req) {
 
 router.get('/',auth, async (req,res) => {
     userId= req.session.user._id.toString()
+    console.log(req.session)
     const perPage = 20
     const page =  1
-    try {
-        
+    try {     
         // const records = await Record.find()
         // .populate('userId','email name')
         const records = await Record.find()
@@ -33,6 +33,7 @@ router.get('/',auth, async (req,res) => {
             title: 'Просмотр данных',
             isTable: true,
             userRole: req.session.user ? req.session.user.role : null,
+            grbsId: req.session.user.grbsId,
             records,
             userId,
             isAll: true,
@@ -71,6 +72,7 @@ router.get('/page/:page',auth, async (req,res) => {
             title: 'Просмотр данных',
             isTable: true,
             userRole: req.session.user ? req.session.user.role : null,
+            grbsId: req.session.user.grbsId,
             records,
             userId,
             isAll: true,
@@ -110,6 +112,7 @@ router.get('/my',auth, async (req,res) => {
             title: 'Просмотр данных',
             isTable: true,
             userRole: req.session.user ? req.session.user.role : null,
+            grbsId: req.session.user.grbsId,
             records,
             userId,
             isMy: true,
@@ -148,6 +151,7 @@ router.get('/my/page/:page',auth, async (req,res) => {
             title: 'Просмотр данных',
             isTable: true,
             userRole: req.session.user ? req.session.user.role : null,
+            grbsId: req.session.user.grbsId,
             records,
             userId,
             isMyDep: true,
@@ -234,6 +238,7 @@ router.get('/mydep',auth, async (req,res) => {
             title: 'Просмотр данных',
             isTable: true,
             userRole: req.session.user ? req.session.user.role : null,
+            grbsId: req.session.user.grbsId,
             records,
             userId,
             isMyDep: true,
@@ -318,6 +323,7 @@ router.get('/mydep/page/:page',auth, async (req,res) => {
                 title: 'Просмотр данных',
                 isTable: true,
                 userRole: req.session.user ? req.session.user.role : null,
+                grbsId: req.session.user.grbsId,
                 records,
                 userId,
                 isMyDep: true,

@@ -38,6 +38,11 @@
               <li><a href="/grbs">ГРБС</i></a></li>
             {{/if}}
           {{/ifeq}}
+           {{#if isGrbs}}
+              <li class="active"><a href="/grbs/{{grbsId}}">ГРБС</i></a></li>
+            {{else}}
+              <li><a href="/grbs/{{grbsId}}">ГРБС</i></a></li>
+            {{/if}}
           <li><a href="/auth/logout">Выйти</a></li>
         {{else}}
             {{#if IsLogin}}

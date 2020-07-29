@@ -22,7 +22,9 @@
       <div class="card-tabs">
       <ul class="tabs tabs-fixed-width">
         <li class="tab"><a class="active" href="#old">Подведы</a></li>
+        {{#ifeq userEmail email}}
         <li class="tab"><a  href="#new">Новые</a></li>
+        {{/ifeq}}
       </ul>
     </div>
     <div class="card-content grey lighten-4">
@@ -56,6 +58,7 @@
 {{/if}}
 
       </div>
+{{#ifeq userEmail email}}
       <div id="new">
                   {{#if departmentsnew.length}}   
 
@@ -74,11 +77,13 @@
            <td>{{departmentId.name}}</td>
            <td>{{name}}</td>
            <td>{{email}}</td>
+           
            <td>
                  <a href="/users/approve/{{_id}}"><i class="tiny material-icons">check</i></a>
                  <a href="/users/remove/{{_id}}"><i class="tiny material-icons">close</i></a>
 
            </td>
+           
       </tr>
      </tbody>
 {{/each}}
@@ -91,6 +96,7 @@
 
 {{/if}}
       </div>
+      {{/ifeq}}
     </div>
   </div>
 

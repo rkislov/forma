@@ -81,6 +81,7 @@ router.get('/:id',auth,async (req,res) =>{
         const departmentsnew = await User.find({grbsId: grbs._id, checked: false, delete: false}).populate('departmentId')
             res.render('grbs/view',{
             title: `просмотр ${grbs.name}`,
+            userEmail: req.session.user.email,
             grbs,
             departments,
             departmentsnew
