@@ -12,6 +12,7 @@ router.get('/',auth, async (req,res) => {
     res.render('add', {
         title: 'Добавление данных',
         userRole: req.session.user ? req.session.user.role : null,
+        grbsId: req.session.user.grbsId,
         isAdd: true,
         user
     })

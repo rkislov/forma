@@ -82,6 +82,7 @@ router.get('/:id',auth,async (req,res) =>{
             res.render('grbs/view',{
             title: `просмотр ${grbs.name}`,
             userEmail: req.session.user.email,
+            grbsId: req.session.user.grbsId,
             grbs,
             departments,
             departmentsnew

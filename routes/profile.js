@@ -12,6 +12,7 @@ router.get('/', auth, async (req,res)=>{
     res.render('auth/profile',{
         title: 'Профиль',
         isProfile: true,
+        grbsId: req.session.user.grbsId,
         user,
         grbs
     })
