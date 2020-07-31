@@ -1,11 +1,15 @@
 <nav class="green darken-1">
-    <div class="nav-wrapper">
+    <div class="nav-wrapper ">
       <a href="/" class="brand-logo">Форма</a>
       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-      <ul  class="right hide-on-med-and-down">
-        
+      {{#if isAuth}}
+  
+        {{/if}}
+      <ul  class="right hide-on-med-and-down ">
+      
 
         {{#if isAuth}}
+          
           {{!-- {{#if isHome}}
           <li class="active"><a href="/">Главная</a></li>
           {{else}}
