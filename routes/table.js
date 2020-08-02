@@ -422,6 +422,76 @@ router.post('/edit', auth, async (req,res)=>{
     
 })
 
+router.post('/search',auth, async (req,res) => {
+    userId = req.session.user._id.toString()
+    console.log(req.body)
+    const perPage = 20
+    const page =  1
+
+    try {
+        
+        // const records = await Record.find()
+        // .populate('userId','email name')
+        const records = await Record.find({userId})
+        .populate('userId','email name')
+        .skip((perPage*page)- perPage)
+        .limit(perPage)
+        const pageCount = await Record.countDocuments()
+        const pageCountForIndex = await  Record.countDocuments({userId})
+        const forIndex = pageCountForIndex 
+    
+               
+            res.render('table', {
+            title: 'Просмотр данных',
+            isTable: true,
+            userRole: req.session.user ? req.session.user.role : null,
+            grbsId: req.session.user.grbsId,
+            records,
+            userId,
+            isMy: true,
+            forIndex,
+            pagination: {
+                page,       // The current page the user is on
+                pageCount  // The total number of available pages
+              }
+            
+                                 
+        })
+            
+    } catch (error) {
+        console.log(error)
+    }
+})
+router.get('/searchacpl/', auth,async (req,res) => {
+    try {
+        const regex = new RegExp(req.query["term"],'i')
+        const recordFilter = await Record.find({name: regex})
+        console.log(recordFilter)
+        res.json(recordFilter)
+        // recordFilter.exec((err,data)=>{
+        //     console.log(data)
+        //     const result = [];
+        //     if(!err){
+        //         if (data && data.length && data.length > 0) {
+        //             data.forEach(record => {
+        //                 let obj = {
+        //                 id: record._id,
+        //                 label: record.name
+        //                 }
+        //                 result.push(obj)
+        //             });
+        //         }
+        //         res.jsonp(result)
+        //     }
+        // }) 
+        
+    
+    } catch (error) {
+        console.log(error)
+    }
+   
+})
+
 router.get('/:id', auth, async (req,res) =>{
     try {
         const record = await Record.findById(req.params.id)
@@ -435,6 +505,7 @@ router.get('/:id', auth, async (req,res) =>{
     
 
 })
+
 
 
 

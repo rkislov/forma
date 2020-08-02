@@ -2,14 +2,21 @@
     <div class="nav-wrapper ">
       <a href="/" class="brand-logo">Форма</a>
       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-      {{#if isAuth}}
-  
-        {{/if}}
+
       <ul  class="right hide-on-med-and-down ">
       
 
         {{#if isAuth}}
-          
+        <li>
+        <form>
+          <form  action="/records/search/" method="POST">
+          <div class="input-field ">
+          <i class="material-icons prefix">search</i>
+          <input type="text" id="autocomplete-input" class="autocomplete">
+          <label for="autocomplete-input" >Введите текст</label>
+          </div>     
+        </form>
+        </li>
           {{!-- {{#if isHome}}
           <li class="active"><a href="/">Главная</a></li>
           {{else}}

@@ -9,6 +9,7 @@ const paginate = require('express-paginate');
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 const session = require('express-session')
 const MongoStore = require('connect-mongodb-session')(session)
+const morgan = require('morgan')
 const homeRoutes = require('./routes/home')
 const tableRoutes = require('./routes/table')
 const addRouters = require('./routes/add')
@@ -39,6 +40,7 @@ const store = MongoStore({
     uri: keys.MOMGODB_URI
 })
 
+
 app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
 app.set('views', 'views')
@@ -51,6 +53,7 @@ app.use(session({
     saveUninitialized: false,
     store
 }))
+app.use(morgan('tiny'))
 app.use(csrf())
 app.use(flash())
 app.use(varMiddleware)
