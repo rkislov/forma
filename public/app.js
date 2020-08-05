@@ -18,10 +18,10 @@ document.querySelectorAll('.price').forEach(node => {
     $('input.autocomplete').autocomplete({
             max:10,
             minLength:1,
-            data: function(req) {ajax({
+            data: function(request, response) {ajax({
                 type: 'GET',
                 url: '/records/searchacpl/',
-                data: req,
+                data: request,
                 success: function(response) {
                   var recordsArray = res;
                   var recordsList = {};
